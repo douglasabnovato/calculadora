@@ -12,7 +12,7 @@
 
 ## 💻 Tarefas
 
-- [x] 1. Criar projeto
+- [x] 1. Criar projeto: `npm i -g create-react-app` e `npx create-react-app calculadora`
 - [x] 2. Componente Calculator: src/main/Calculator.jsx
 - [x] 3. Componente Button
 - [x] 4. Componente Display
@@ -26,8 +26,9 @@
 
 ## 🚀 Construído projeto 
 
-- `npm i -g create-react-app`
-- `npx create-react-app calculadora`
+- favicon calculadora
+- título da página
+- idioma da página
 
 ## 🚧 Warnings (identificar, pesquisar, programar e testar)
  
