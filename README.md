@@ -3,7 +3,7 @@
 </h4>   
 
 <p align="center" style="display: flex; align-items: flex-start; justify-content: center;"> 
-  <img alt="Calculadora" title="#Calculadora" src="./.github/tela.jpg" width="600px"> 
+  <img alt="Calculadora" title="#Calculadora" src="./.github/tela-1.jpg" width="600px"> 
 </p> 
 
 ## 🎨 Projeto
