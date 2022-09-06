@@ -13,12 +13,10 @@
 ## 💻 Tarefas
 
 - [x] 1. Criar projeto: `npm i -g create-react-app` e `npx create-react-app calculadora`
-- [x] 2. Componente Calculator: src/main/Calculator.jsx
-- [x] 3. Componente Button: src/components/Button.jsx e src/components/Button.css
-- [x] 4. Componente Display
-- [x] 5. Componente Button
-- [x] 6. Implementando a lógica
-- [x] 7. Implementando a lógica 
+- [x] 2. Estilização do Componente Calculator: src/main/Calculator.jsx
+- [x] 3. Estilização do Componente Button: src/components/Button.jsx e src/components/Button.css
+- [x] 4. Estilização do Componente Display: src/components/Display.jsx
+- [x] 5. Implementando a lógica da calculadora: src/main/Calculator.jsx
 
 ## 🚀 Seções 
 
