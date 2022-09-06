@@ -8,7 +8,7 @@
 
 ## 🎨 Projeto
 
-- Uma calculadora tradicional
+- Uma calculadora com as principais funcionalidades de somar, subtrair, dividir e multiplicar além dos botões principais de igual, AC ( "Cancel Entry" ou "cancelar registro") e vírgula. Lembrando que deve seguir o design exibido na imagem template para o posicionamento dos botões e display.
 
 ## 💻 Tarefas
 
@@ -27,7 +27,7 @@
 ## 🚀 Construído projeto 
 
 - `npm i -g create-react-app`
-- `create-react-app calculadora`
+- `npx create-react-app calculadora`
 
 ## 🚧 Warnings (identificar, pesquisar, programar e testar)
  
