@@ -29,10 +29,12 @@
 - favicon calculadora
 - título da página
 - idioma da página
+- fonts google roboto via link
+- [gradiente uigradients](https://uigradients.com/#CitrusPeel)
 
 ## 🚧 Warnings (identificar, pesquisar, programar e testar)
  
-- correções 
+- [eval can be harmful  no-eval](https://eslint.org/docs/latest/rules/no-eval) 
 
 ## 📝 Licença
 
