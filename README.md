@@ -14,7 +14,7 @@
 
 - [x] 1. Criar projeto: `npm i -g create-react-app` e `npx create-react-app calculadora`
 - [x] 2. Componente Calculator: src/main/Calculator.jsx
-- [x] 3. Componente Button
+- [x] 3. Componente Button: src/components/Button.jsx e src/components/Button.css
 - [x] 4. Componente Display
 - [x] 5. Componente Button
 - [x] 6. Implementando a lógica
@@ -31,6 +31,8 @@
 - idioma da página
 - fonts google roboto via link
 - [gradiente uigradients](https://uigradients.com/#CitrusPeel)
+- variáveis em css
+- estratégia do layout com grid css
 
 ## 🚧 Warnings (identificar, pesquisar, programar e testar)
  
