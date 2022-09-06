@@ -3,7 +3,7 @@
 </h4>   
 
 <p align="center" style="display: flex; align-items: flex-start; justify-content: center;"> 
-  <img alt="Calculadora" title="#Calculadora" src="./assets/tela.jpg" width="600px"> 
+  <img alt="Calculadora" title="#Calculadora" src="./.github/tela.jpg" width="600px"> 
 </p> 
 
 ## 🎨 Projeto
@@ -13,7 +13,7 @@
 ## 💻 Tarefas
 
 - [x] 1. Criar projeto
-- [x] 2. Componente calculadora
+- [x] 2. Componente Calculator: src/main/Calculator.jsx
 - [x] 3. Componente Button
 - [x] 4. Componente Display
 - [x] 5. Componente Button
