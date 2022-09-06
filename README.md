@@ -32,7 +32,8 @@
 - fonts google roboto via link
 - [gradiente uigradients](https://uigradients.com/#CitrusPeel)
 - variáveis em css
-- estratégia do layout com grid css
+- estratégia do layout com grid css para o Calculator
+- estratégia do layout com flexbox para o Display
 
 ## 🚧 Warnings (identificar, pesquisar, programar e testar)
  
