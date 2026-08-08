@@ -1,10 +1,14 @@
-.display{
+.display {
     grid-column: span 4;
-    background-color: #0004;
     display: flex;
     justify-content: flex-end;
     align-items: center;
     padding: 20px;
     font-size: 2.1em;
     overflow: hidden;
+    
+    /* Variáveis injetadas pelo Tema global */
+    background-color: var(--bg-display);
+    color: var(--text-display);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
