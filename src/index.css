@@ -1,13 +1,61 @@
 * {
-    font-family: "RobotoMono", monospace;     
+    font-family: "Roboto", monospace;
+    box-sizing: border-box;
 }
 
-body{
-    display: flex;
-    height: 100vh;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: #fff;
-    background: linear-gradient(to right, rgb(83,105,118), rgb(41,46,73));
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* 
+  TEMA VIVO (Inspirado no iFood): 
+  Fundos claros, textos escuros, destaque vermelho vivo. 
+*/
+.app-container.vivo {
+    --bg-page: #e2e8f0; 
+    --text-color: #333333;
+    
+    --bg-calculator: #ffffff;
+    --shadow-calculator: 0 20px 40px rgba(0, 0, 0, 0.15), 0 5px 15px rgba(0, 0, 0, 0.05);
+    
+    /* AJUSTE AQUI: Visor levemente mais escuro para destacar das teclas */
+    --bg-display: #d4d4d8; 
+    --text-display: #111111;
+    
+    --bg-button: #fafafa;
+    --text-button: #333333;
+    --border-button: solid 1px #e4e4e7;
+    
+    --bg-operation: #ea1d2c; /* Cor de conversão */
+    --text-operation: #ffffff;
+    
+    background-color: var(--bg-page);
+    color: var(--text-color);
+}
+
+/* 
+  TEMA DARK: 
+  Fundo gradiente, calculadoras escuras e botões laranjas (estilo original). 
+*/
+.app-container.dark {
+    --bg-page: linear-gradient(to right, rgb(83,105,118), rgb(41,46,73));
+    --text-color: #ffffff;
+    
+    /* Variáveis repassadas para a Calculadora */
+    --bg-calculator: rgba(0, 0, 0, 0.5);
+    --shadow-calculator: 0 10px 30px rgba(0, 0, 0, 0.5);
+    
+    --bg-display: rgba(0, 0, 0, 0.4);
+    --text-display: #ffffff;
+    
+    --bg-button: rgba(255, 255, 255, 0.1);
+    --text-button: #ffffff;
+    --border-button: solid 1px rgba(0, 0, 0, 0.3);
+    
+    --bg-operation: #fa8231; /* Cor de operação original */
+    --text-operation: #ffffff;
+    
+    background: var(--bg-page);
+    color: var(--text-color);
 }

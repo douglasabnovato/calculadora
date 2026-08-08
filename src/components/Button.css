@@ -1,35 +1,36 @@
-:root{
-    --bg-button: #f0f0f0;
-    --border-button: solid 1px #888;
-}
-
-.button{
+.button {
     font-size: 1.4rem;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    
+    /* Variáveis injetadas pelo Tema global */
     background-color: var(--bg-button);
-    border: none;
-    border: none;
+    color: var(--text-button);
     border-right: var(--border-button);
     border-bottom: var(--border-button);
-    outline: none;
+    
+    transition: background-color 0.2s ease, opacity 0.2s ease, color 0.2s ease;
 }
 
-.button:active{
-    background-color: #ccc;
+/* O uso de opacity no active garante que o efeito de clique funcione bem em qualquer tema */
+.button:active {
+    opacity: 0.6;
 }
 
-.button.double{
+.button.double {
     grid-column: span 2;
 }
 
-.button.triple{
+.button.triple {
     grid-column: span 3;
 }
 
-.button.operation{
-    background-color: #fa8231;
-    color: #fff;
+.button.operation {
+    background-color: var(--bg-operation);
+    color: var(--text-operation);
 }
 
-.button.operation:active{
-    background-color: #fa8231cc;
+.button.operation:active {
+    opacity: 0.8;
 }
