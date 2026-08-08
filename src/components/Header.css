@@ -1,0 +1,38 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 50px;
+  background-color: transparent;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+/* O vermelho vivo da nossa referência visual */
+.logo-highlight {
+  color: #ea1d2c; 
+  font-style: italic;
+}
+
+.logo-text {
+  color: inherit;
+}
+
+.theme-toggle {
+  background: transparent;
+  border: 1px solid currentColor;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: inherit;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.theme-toggle:hover {
+  opacity: 0.7;
+}

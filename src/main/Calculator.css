@@ -1,9 +1,14 @@
-.calculator{
+.calculator {
     height: 320px;
     width: 235px;
-    border-radius: 5px;
+    border-radius: 8px; /* Bordas um pouco mais arredondadas para um visual moderno */
     overflow: hidden;
     display: grid;
     grid-template-columns: repeat(4, 25%);
     grid-template-rows: 1fr 48px 48px 48px 48px 48px;
+    
+    /* Variáveis injetadas pelo Tema global */
+    background-color: var(--bg-calculator);
+    box-shadow: var(--shadow-calculator);
+    transition: all 0.3s ease;
 }
