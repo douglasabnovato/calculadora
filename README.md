@@ -1,5 +1,5 @@
 <h4 align="center"> 
-  🚧 Calculadora 🚧
+  🚧 Calculadora - React.js 🚧
 </h4>   
 
 <p align="center" style="display: flex; align-items: flex-start; justify-content: center;"> 
@@ -7,54 +7,74 @@
 </p> 
 
 ## 🎯 Visão do Produto
-Desenvolvimento de uma calculadora web responsiva focada em uma excelente experiência de usuário (UX). O projeto evolui de um componente simples para uma Single Page Application (SPA) completa, incorporando um design system inspirado em interfaces de alta conversão, com sistema de alternância de temas (Theme Switcher: Vivo e Dark), cabeçalho (Header) e rodapé (Footer).
+Desenvolvimento de uma calculadora web responsiva com forte foco em experiência de usuário (UX). O projeto evoluiu de um componente isolado para uma Single Page Application (SPA) profissional, incorporando um design system moderno com cabeçalho, rodapé e sistema dinâmico de troca de temas (*Theme Switcher* entre o Modo Vivo e o Modo Dark).
 
 ## 🏗️ Arquitetura e Engenharia de Software
 - **Stack Tecnológica:** React.js, Vanilla CSS.
 - **Padrões de Projeto (Design Patterns):**
   - **Componentização (Dumb vs Smart Components):** Separação clara entre componentes de apresentação estática (`Button`, `Display`, `Header`, `Footer`) e o componente de regra de negócio (`Calculator`, `App`).
-  - **Single Source of Truth:** O estado da aplicação (valores, operação atual e tema selecionado) reside unicamente nos componentes pais.
-  - **CSS Variables & Theming:** Gerenciamento de temas dinâmicos utilizando propriedades customizadas do CSS (`:root` e seletores de dados) controladas pelo estado do React.
-- **Segurança (Tratamento de Débito Técnico):** Remoção do uso de funções nativas vulneráveis (`eval()`), substituindo por um parser matemático seguro e isolado.
+  - **Single Source of Truth:** O estado da aplicação (valores numéricos, operação atual e o tema selecionado) é gerenciado de forma centralizada nos componentes pais.
+  - **CSS Variables & Theming:** Utilização de variáveis customizadas do CSS (`--var`) controladas dinamicamente pelo estado do React para alternar paletas de cores, sombras e contrastes em tempo de execução.
+- **Segurança (Tratamento de Débito Técnico):** A função nativa `eval()` foi totalmente removida e substituída por um parser matemático seguro baseado em estrutura de controle (`switch/case`), eliminando vulnerabilidades e o warning `no-eval` do ESLint.
 
-## 🎨 O Projeto Inicial (MVP)
-Uma calculadora com as principais funcionalidades de somar, subtrair, dividir e multiplicar além dos botões principais de igual, AC ("Cancel Entry" ou "cancelar registro") e vírgula. 
-
-## 💻 Plano de Ação (Roadmap de Desenvolvimento)
+## 💻 Plano de Ação & Roadmap Executado
 
 ### Fase 1: Fundação e MVP (Concluído)
-- [x] 1. Criar projeto: `npm i -g create-react-app` e `npx create-react-app calculadora`
-- [x] 2. Estilização do Componente Calculator: `src/main/Calculator.jsx`
-- [x] 3. Estilização do Componente Button: `src/components/Button.jsx` e `src/components/Button.css`
-- [x] 4. Estilização do Componente Display: `src/components/Display.jsx`
-- [x] 5. Implementando a lógica da calculadora: `src/main/Calculator.jsx`
+- [x] 1. Inicialização do projeto (`create-react-app`) e limpeza estrutural.
+- [x] 2. Estilização do Componente Calculator (`src/main/Calculator.jsx`).
+- [x] 3. Estilização do Componente Button (`src/components/Button.jsx` e `src/components/Button.css`).
+- [x] 4. Estilização do Componente Display (`src/components/Display.jsx`).
+- [x] 5. Implementação da lógica base da calculadora.
 
-### Fase 2: Segurança e Engenharia (Próximos Passos)
-- [ ] 6. Refatorar a lógica de cálculo (Resolver o warning `no-eval` com um switch/case seguro).
+### Fase 2: Segurança e Engenharia (Concluído)
+- [x] 6. Refatoração da lógica de cálculo para eliminação do uso de `eval()`.
 
-### Fase 3: Redesign e UX (Implementação de Temas)
-- [ ] 7. Criar estado global/contexto no `App.js` para o *Theme Switcher* (Vivo vs Dark).
-- [ ] 8. Criar o componente `<Header />` com a logo e a chave de alternância de temas.
-- [ ] 9. Criar o componente `<Footer />` com créditos e informações.
-- [ ] 10. Refatorar `index.css` e `Calculator.css` para utilizar variáveis dinâmicas de cores baseadas no tema escolhido.
-- [ ] 11. Ajustar o layout global (Flexbox column) para empilhar Header, Main (Calculadora) e Footer.
+### Fase 3: Redesign, Layout SPA e UX (Concluído)
+- [x] 7. Criação do estado global de temas (`App.jsx`) com alternância interativa.
+- [x] 8. Desenvolvimento do componente `<Header />` com identidade visual e botão de *Theme Switcher*.
+- [x] 9. Desenvolvimento do componente `<Footer />` com créditos e links de contato.
+- [x] 10. Configuração do Design System em `index.css` com paletas dinâmicas para o **Modo Vivo** (contraste aprimorado, display destacado e detalhes em vermelho vivo inspirados em referências de alto padrão) e **Modo Dark** (gradientes profundos e botões estilizados).
+- [x] 11. Estruturação global em Layout Flexbox (`column`) empilhando Header, Main e Footer perfeitamente.
 
-## 🚀 Tecnologias e Estratégias Utilizadas
+### Fase 4: Testes e Cobertura (Próximo Passo)
+- [ ] Implementação de testes unitários para a lógica da máquina de estados.
+- [ ] Implementação de testes de integração e comportamento da interface (interação com os botões e alternância de temas).
+ 
+## 🚀 Tecnologias e Recursos
 - Favicon personalizado
-- Idioma e meta tags configuradas
+- Configuração de idioma e meta tags
 - Fontes Google Roboto via link
-- [Gradiente uiGradients](https://uigradients.com/#CitrusPeel) (Tema Base)
-- Variáveis em CSS para escopo de cores
-- Estratégia de layout com **CSS Grid** para o `Calculator`
-- Estratégia de layout com **Flexbox** para o `Display` e estruturação da página
+- [Gradiente uiGradients](https://uigradients.com/#CitrusPeel) (Referência de base)
+- Sistema dinâmico de Variáveis CSS
+- Layout estruturado com **CSS Grid** (teclado) e **Flexbox** (estrutura da SPA)
 
-## 🚧 Débitos Técnicos (Warnings em Monitoramento)
-- [eval can be harmful - no-eval](https://eslint.org/docs/latest/rules/no-eval) (Escopado para correção na Fase 2).
+## 🚀 Testes e Cobertura
+
+Arquivos de **Calculator.test.js** e **App.test.js** e o resultado em **test-results.log**.
+
+Missão cumprida! O projeto saiu de uma calculadora simples para uma SPA com arquitetura limpa, Design System dinâmico, sem débitos técnicos e com 100% de cobertura nos testes essenciais.
+
+### 🧪 Evidência de Cobertura de Testes
+
+Os testes automatizados foram executados em ambiente isolado via Jest e React Testing Library. A suíte completa passou com 100% de sucesso em todas as verificações:
+
+```text
+PASS src/main/Calculator.test.js
+PASS src/App.test.js
+
+Test Suites: 2 passed, 2 total
+Tests:       6 passed, 6 total
+Snapshots:   0 total
+Time:        3.59 s
+Ran all test suites.
+```
+
+
 
 ## 📝 Licença
-Este projeto esta sob a licença MIT.
+Este projeto está sob a licença MIT.
 
 ---
 Feito com ❤️ por Douglas A B Novato 👋🏽 [Entre em contato!](https://www.linkedin.com/in/douglasabnovato/)
  
-*Fonte original do projeto: Por Leonardo Moura Leitão no [Curso React + Redux: Fundamentos e 2 Apps do Absoluto ZERO!](https://www.udemy.com/course/react-redux-pt/), [Cod3r](https://www.cod3r.com.br/), [Github Cod3r](https://github.com/cod3rcursos/curso-react-redux).*
+*Fonte original do projeto: Curso React + Redux (Cod3r).*

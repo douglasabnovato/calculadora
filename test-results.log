@@ -1,0 +1,1069 @@
+ /c/douglasabnovato/calculadora (feature/calculadora)
+$ npm test
+
+> calculadora@0.1.0 test
+> react-scripts test
+ FAIL  src/main/Calculator.test.js (29.8 s)
+  ● Calculator Component - Testes da Máquina de Estados › deve renderizar o display inicial com o valor "0"
+
+    TestingLibraryElementError: Found multiple elements with the text: 0
+
+    Here are the matching elements:
+
+    <div
+      class="display"
+    >
+      0
+    </div>
+
+    <button
+      class="
+                button
+
+                double
+
+
+        "
+    >
+      0
+    </button>
+
+    (If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+    <body>
+      <div>
+        <div
+          class="calculator"
+        >
+          <div
+            class="display"
+          >
+            0
+          </div>
+          <button
+            class="
+                button
+
+
+                triple
+
+        "
+          >
+            AC
+          </button>
+          <button
+            class="
+                button
+                operation
+
+
+
+        "
+          >
+            /
+          </button>
+          <button
+            class="
+                button
+
+
+
+
+        "
+          >
+            7
+          </button>
+          <button
+            class="
+                button
+
+
+
+
+        "
+          >
+            8
+          </button>
+          <button
+            class="
+                button
+
+
+
+
+        "
+          >
+            9
+          </button>
+          <button
+            class="
+                button
+                operation
+
+
+
+        "
+          >
+            *
+          </button>
+          <button
+            class="
+                button
+
+
+
+
+        "
+          >
+            4
+          </button>
+          <button
+            class="
+                button
+
+
+
+
+        "
+          >
+            5
+          </button>
+          <button
+            class="
+                button
+
+
+
+
+        "
+          >
+            6
+          </button>
+          <button
+            class="
+                button
+                operation
+
+
+
+        "
+          >
+            -
+          </button>
+          <button
+            class="
+                button
+
+
+
+
+        "
+          >
+            1
+          </button>
+          <button
+            class="
+                button
+
+
+
+
+        "
+          >
+            2
+          </button>
+          <button
+            class="
+                button
+
+
+
+
+        "
+          >
+            3
+          </button>
+          <button
+            class="
+                button
+                operation
+
+
+
+        "
+          >
+            +
+          </button>
+          <button
+            class="
+                button
+
+                double
+
+
+        "
+          >
+            0
+          </button>
+          <button
+            class="
+                button
+
+
+
+
+        "
+          >
+            .
+          </button>
+          <button
+            class="
+                button
+                operation
+
+
+
+        "
+          >
+            =
+          </button>
+        </div>
+      </div>
+    </body>
+
+       7 |   test('deve renderizar o display inicial com o valor "0"', () => {
+       8 |     render(<Calculator />);
+    >  9 |     const displayElement = screen.getByText('0');
+         |
+       ^
+      10 |     expect(displayElement).toBeInTheDocument();
+      11 |   });
+      12 |
+
+      at Object.getElementError (node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/config.js:37:19)
+      at getElementError (node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/query-helpers.js:25:35)
+      at getMultipleElementsFoundError (node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/query-helpers.js:29:10)
+      at node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/query-helpers.js:66:13
+      at getByText (node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/query-helpers.js:111:19)
+      at Object.<anonymous> (src/main/Calculator.test.js:9:35)
+
+  ● Calculator Component - Testes da Máquina de Estados › deve realizar uma operação de soma corretamente (2 + 3 = 5)
+
+    TestingLibraryElementError: Found multiple elements with the text: 5
+
+    Here are the matching elements:
+
+    <div
+      class="display"
+    >
+      5
+    </div>
+
+    <button
+      class="
+                button
+
+
+
+
+        "
+    >
+      5
+    </button>
+
+    (If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+    <body>
+      <div>
+        <div
+          class="calculator"
+        >
+          <div
+            class="display"
+          >
+            5
+          </div>
+          <button
+            class="
+                button
+
+
+                triple
+
+        "
+          >
+            AC
+          </button>
+          <button
+            class="
+                button
+                operation
+
+
+
+        "
+          >
+            /
+          </button>
+          <button
+            class="
+                button
+
+
+
+
+        "
+          >
+            7
+          </button>
+          <button
+            class="
+                button
+
+
+
+
+        "
+          >
+            8
+          </button>
+          <button
+            class="
+                button
+
+
+
+
+        "
+          >
+            9
+          </button>
+          <button
+            class="
+                button
+                operation
+
+
+
+        "
+          >
+            *
+          </button>
+          <button
+            class="
+                button
+
+
+
+
+        "
+          >
+            4
+          </button>
+          <button
+            class="
+                button
+
+
+
+
+        "
+          >
+            5
+          </button>
+          <button
+            class="
+                button
+
+
+
+
+        "
+          >
+            6
+          </button>
+          <button
+            class="
+                button
+                operation
+
+
+
+        "
+          >
+            -
+          </button>
+          <button
+            class="
+                button
+
+
+
+
+        "
+          >
+            1
+          </button>
+          <button
+            class="
+                button
+
+
+
+
+        "
+          >
+            2
+          </button>
+          <button
+            class="
+                button
+
+
+
+
+        "
+          >
+            3
+          </button>
+          <button
+            class="
+                button
+                operation
+
+
+
+        "
+          >
+            +
+          </button>
+          <button
+            class="
+                button
+
+                double
+
+
+        "
+          >
+            0
+          </button>
+          <button
+            class="
+                button
+
+
+
+
+        "
+          >
+            .
+          </button>
+          <button
+            class="
+                button
+                operation
+
+
+
+        "
+          >
+            =
+          </button>
+        </div>
+      </div>
+    </body>
+
+      20 |     fireEvent.click(screen.getByText('='));
+      21 |
+    > 22 |     expect(screen.getByText('5')).toBeInTheDocument();
+         |                   ^
+      23 |   });
+      24 |
+      25 |   test('deve tratar divisão por zero de forma segura retornando 0', () => {
+
+      at Object.getElementError (node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/config.js:37:19)
+      at getElementError (node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/query-helpers.js:25:35)
+      at getMultipleElementsFoundError (node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/query-helpers.js:29:10)
+      at node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/query-helpers.js:66:13
+      at getByText (node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/query-helpers.js:111:19)
+      at Object.<anonymous> (src/main/Calculator.test.js:22:19)
+
+  ● Calculator Component - Testes da Máquina de Estados › deve tratar divisão por zero de forma segura retornando 0
+
+    TestingLibraryElementError: Found multiple elements with the text: 0
+
+    Here are the matching elements:
+
+    <div
+      class="display"
+    >
+      0
+    </div>
+
+    <button
+      class="
+                button
+
+                double
+
+
+        "
+    >
+      0
+    </button>
+
+    (If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+    <body>
+      <div>
+        <div
+          class="calculator"
+        >
+          <div
+            class="display"
+          >
+            0
+          </div>
+          <button
+            class="
+                button
+
+
+                triple
+
+        "
+          >
+            AC
+          </button>
+          <button
+            class="
+                button
+                operation
+
+
+
+        "
+          >
+            /
+          </button>
+          <button
+            class="
+                button
+
+
+
+
+        "
+          >
+            7
+          </button>
+          <button
+            class="
+                button
+
+
+
+
+        "
+          >
+            8
+          </button>
+          <button
+            class="
+                button
+
+
+
+
+        "
+          >
+            9
+          </button>
+          <button
+            class="
+                button
+                operation
+
+
+
+        "
+          >
+            *
+          </button>
+          <button
+            class="
+                button
+
+
+
+
+        "
+          >
+            4
+          </button>
+          <button
+            class="
+                button
+
+
+
+
+        "
+          >
+            5
+          </button>
+          <button
+            class="
+                button
+
+
+
+
+        "
+          >
+            6
+          </button>
+          <button
+            class="
+                button
+                operation
+
+
+
+        "
+          >
+            -
+          </button>
+          <button
+            class="
+                button
+
+
+
+
+        "
+          >
+            1
+          </button>
+          <button
+            class="
+                button
+
+
+
+
+        "
+          >
+            2
+          </button>
+          <button
+            class="
+                button
+
+
+
+
+        "
+          >
+            3
+          </button>
+          <button
+            class="
+                button
+                operation
+
+
+
+        "
+          >
+            +
+          </button>
+          <button
+            class="
+                button
+
+                double
+
+
+        "
+          >
+            0
+          </button>
+          <button
+            class="
+                button
+
+
+
+
+        "
+          >
+            .
+          </button>
+          <button
+            class="
+                button
+                operation
+
+
+
+        "
+          >
+            =
+          </button>
+        </div>
+      </div>
+    </body>
+
+      32 |     fireEvent.click(screen.getByText('='));
+      33 |
+    > 34 |     expect(screen.getByText('0')).toBeInTheDocument();
+         |                   ^
+      35 |   });
+      36 |
+      37 | });
+
+      at Object.getElementError (node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/config.js:37:19)
+      at getElementError (node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/query-helpers.js:25:35)
+      at getMultipleElementsFoundError (node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/query-helpers.js:29:10)
+      at node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/query-helpers.js:66:13
+      at getByText (node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/query-helpers.js:111:19)
+      at Object.<anonymous> (src/main/Calculator.test.js:34:19)
+
+ FAIL  src/App.test.js (30.275 s)
+  ● App Component - Testes de Integração e UI › deve alternar entre o Modo Vivo e o Modo Dark ao clicar no botão do Header
+
+    TypeError: expect(...).toBeInTheDocument is not a function
+
+      10 |     // Localiza o botão de alternância de tema
+      11 |     const themeButton = screen.getByRole('button', { name: /Modo Dark|Modo Vivo/i });
+    > 12 |     expect(themeButton).toBeInTheDocument();
+         |                         ^
+      13 |
+      14 |     // Clica para mudar o tema
+      15 |     fireEvent.click(themeButton);
+
+      at Object.<anonymous> (src/App.test.js:12:25)
+
+  ● App Component - Testes de Integração e UI › deve limpar o display da calculadora ao acionar o botão AC
+
+    TestingLibraryElementError: Found multiple elements with the text: 9
+
+    Here are the matching elements:
+
+    <div
+      class="display"
+    >
+      9
+    </div>
+
+    <button
+      class="
+                button
+
+
+
+
+        "
+    >
+      9
+    </button>
+
+    (If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+    <body>
+      <div>
+        <div
+          class="app-container vivo"
+        >
+          <header
+            class="header"
+          >
+            <div
+              class="logo"
+            >
+              <span
+                class="logo-highlight"
+              >
+                calc
+              </span>
+              <span
+                class="logo-text"
+              >
+                APP
+              </span>
+            </div>
+            <nav
+              class="nav-menu"
+            >
+              <button
+                class="theme-toggle"
+              >
+                🌙 Modo Dark
+              </button>
+            </nav>
+          </header>
+          <main
+            class="main-content"
+          >
+            <div
+              class="calculator"
+            >
+              <div
+                class="display"
+              >
+                9
+              </div>
+              <button
+                class="
+                button
+
+
+                triple
+
+        "
+              >
+                AC
+              </button>
+              <button
+                class="
+                button
+                operation
+
+
+
+        "
+              >
+                /
+              </button>
+              <button
+                class="
+                button
+
+
+
+
+        "
+              >
+                7
+              </button>
+              <button
+                class="
+                button
+
+
+
+
+        "
+              >
+                8
+              </button>
+              <button
+                class="
+                button
+
+
+
+
+        "
+              >
+                9
+              </button>
+              <button
+                class="
+                button
+                operation
+
+
+
+        "
+              >
+                *
+              </button>
+              <button
+                class="
+                button
+
+
+
+
+        "
+              >
+                4
+              </button>
+              <button
+                class="
+                button
+
+
+
+
+        "
+              >
+                5
+              </button>
+              <button
+                class="
+                button
+
+
+
+
+        "
+              >
+                6
+              </button>
+              <button
+                class="
+                button
+                operation
+
+
+
+        "
+              >
+                -
+              </button>
+              <button
+                class="
+                button
+
+
+
+
+        "
+              >
+                1
+              </button>
+              <button
+                class="
+                button
+
+
+
+
+        "
+              >
+                2
+              </button>
+              <button
+                class="
+                button
+
+
+
+
+        "
+              >
+                3
+              </button>
+              <button
+                class="
+                button
+                operation
+
+
+
+        "
+              >
+                +
+              </button>
+              <button
+                class="
+                button
+
+                double
+
+
+        "
+              >
+                0
+              </button>
+              <button
+                class="
+                button
+
+
+
+
+        "
+              >
+                .
+              </button>
+              <button
+                class="
+                button
+                operation
+
+
+
+        "
+              >
+                =
+              </button>
+            </div>
+          </main>
+          <footer
+            class="footer"
+          >
+            <p>
+              Feito com ❤️ por Douglass A B Novato 👋🏽
+
+              <a
+                href="https://www.linkedin.com/in/douglasabnovato/"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                Entre em contato!
+              </a>
+            </p>
+          </footer>
+
+        </div>
+      </div>
+    </body>
+
+      24 |     // Digita um número e depois limpa com AC
+      25 |     fireEvent.click(screen.getByText('9'));
+    > 26 |     expect(screen.getByText('9')).toBeInTheDocument();
+         |                   ^
+      27 |
+      28 |     // Aciona o botão de limpar memória (AC)
+      29 |     fireEvent.click(screen.getByText('AC'));
+
+      at Object.getElementError (node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/config.js:37:19)
+      at getElementError (node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/query-helpers.js:25:35)
+      at getMultipleElementsFoundError (node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/query-helpers.js:29:10)
+      at node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/query-helpers.js:66:13
+      at getByText (node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/query-helpers.js:111:19)
+      at Object.<anonymous> (src/App.test.js:26:19)
+
+  ● App Component - Testes de Integração e UI › deve renderizar os componentes estruturais Header e Footer
+
+    TypeError: expect(...).toBeInTheDocument is not a function
+
+      37 |
+      38 |     // Verifica se os créditos do footer e a logo do header estão presentes na DOM
+    > 39 |     expect(screen.getByText(/Douglas A B Novato/i)).toBeInTheDocument();
+         |
+                         ^
+      40 |     expect(screen.getByText('calc')).toBeInTheDocument();
+      41 |   });
+      42 |
+
+      at Object.<anonymous> (src/App.test.js:39:53)
+
+Test Suites: 2 failed, 2 total
+Tests:       6 failed, 6 total
+Snapshots:   0 total
+Time:        54.057 s
+Ran all test suites related to changed files.
+
+Watch Usage
+ › Press a to run all tests.
+ › Press f to run only failed tests.
+ › Press q to quit watch mode.
+ › Press p to filter by a filename regex pattern.
+ › Press t to filter by a test name regex pattern.
+ › Press Enter to trigger a test run.
