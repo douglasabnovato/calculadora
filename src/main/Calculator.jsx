@@ -1,114 +1,70 @@
-import React, { Component } from "react";
-
+/*
+ * Calculator · interface da calculadora; toda regra está na FSM de core/calculator.js.
+ * Aceita clique e teclado físico (números, + − × ÷, Enter, Backspace, Esc).
+ */
+import React, { useEffect, useReducer } from "react";
 import "./Calculator.css";
-
 import Button from "../components/Button";
 import Display from "../components/Display";
+import { reducer, initialState, displayText, expressionText, keyToAction } from "../core/calculator";
 
-const initialState = {
-    displayValue: "0",
-    clearDisplay: false,
-    operation: null,
-    values: [0, 0],
-    current: 0
+const KEYS = [
+  { label: "AC", aria: "Limpar tudo", action: { type: "CLEAR" }, className: "double" },
+  { label: "⌫", aria: "Apagar último dígito", action: { type: "BACKSPACE" } },
+  { label: "÷", aria: "Dividir", action: { type: "OPERATOR", operator: "/" }, operation: true },
+  { label: "7", action: { type: "DIGIT", digit: "7" } },
+  { label: "8", action: { type: "DIGIT", digit: "8" } },
+  { label: "9", action: { type: "DIGIT", digit: "9" } },
+  { label: "×", aria: "Multiplicar", action: { type: "OPERATOR", operator: "*" }, operation: true },
+  { label: "4", action: { type: "DIGIT", digit: "4" } },
+  { label: "5", action: { type: "DIGIT", digit: "5" } },
+  { label: "6", action: { type: "DIGIT", digit: "6" } },
+  { label: "−", aria: "Subtrair", action: { type: "OPERATOR", operator: "-" }, operation: true },
+  { label: "1", action: { type: "DIGIT", digit: "1" } },
+  { label: "2", action: { type: "DIGIT", digit: "2" } },
+  { label: "3", action: { type: "DIGIT", digit: "3" } },
+  { label: "+", aria: "Somar", action: { type: "OPERATOR", operator: "+" }, operation: true },
+  { label: "0", action: { type: "DIGIT", digit: "0" }, className: "double" },
+  { label: ",", aria: "Vírgula decimal", action: { type: "DOT" } },
+  { label: "=", aria: "Igual", action: { type: "EQUALS" }, operation: true },
+];
+
+/* Componente da calculadora. */
+export default function Calculator() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    /* Converte teclas em ações; Enter sobre um botão focado fica com o próprio botão. */
+    function onKeyDown(event) {
+      if (event.ctrlKey || event.metaKey || event.altKey) return;
+      if (event.key === "Enter" && event.target instanceof HTMLButtonElement) return;
+      const action = keyToAction(event.key);
+      if (!action) return;
+      event.preventDefault();
+      dispatch(action);
+    }
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, []);
+
+  return (
+    <section className="calculator" aria-label="Calculadora">
+      <Display
+        value={displayText(state)}
+        expression={expressionText(state)}
+        isError={state.phase === "error"}
+      />
+      {KEYS.map((key) => (
+        <Button
+          key={key.label}
+          label={key.label}
+          ariaLabel={key.aria}
+          operation={key.operation}
+          className={key.className}
+          onPress={() => dispatch(key.action)}
+        />
+      ))}
+    </section>
+  );
 }
-
-export default class Calculator extends Component {
-
-    state = { ...initialState }
-
-    constructor(props) {
-        super(props)
-        this.clearMemory = this.clearMemory.bind(this)
-        this.setOperation = this.setOperation.bind(this)
-        this.addDigit = this.addDigit.bind(this)
-    }
-
-    clearMemory() {
-        this.setState({ ...initialState })
-    }
-
-    setOperation(operation) {
-        if (this.state.current === 0) {
-            this.setState({ operation, current: 1, clearDisplay: true })
-        } else {
-            const equals = operation === "="
-            const currentOperation = this.state.operation
-            const values = [...this.state.values]
-
-            // Nossa função de cálculo segura (Single Source of Truth para matemática)
-            const calculate = (val1, operator, val2) => {
-                switch (operator) {
-                    case '+': return val1 + val2;
-                    case '-': return val1 - val2;
-                    case '*': return val1 * val2;
-                    case '/': return val1 / val2;
-                    default: return val1;
-                }
-            };
-
-            try {
-                let result = calculate(values[0], currentOperation, values[1]);
-                // Trata divisão por zero e dízimas muito longas
-                values[0] = isNaN(result) || !isFinite(result) ? 0 : parseFloat(result.toFixed(10));
-            } catch (e) {
-                values[0] = this.state.values[0]
-            }
-
-            values[1] = 0
-            this.setState({
-                displayValue: values[0],
-                operation: equals ? null : operation,
-                current: equals ? 0 : 1,
-                clearDisplay: !equals,
-                values
-            })
-        }
-    }
-
-    addDigit(n) {
-        if (n === "." && this.state.displayValue.includes(".")) {
-            return
-        }
-
-        const clearDisplay = this.state.displayValue === "0" || this.state.clearDisplay
-        const currentValue = clearDisplay ? "" : this.state.displayValue
-        const displayValue = currentValue + n
-
-        this.setState({ displayValue, clearDisplay: false })
-
-        if (n !== ".") {
-            const i = this.state.current
-            const newValue = parseFloat(displayValue)
-            const values = [...this.state.values]
-            values[i] = newValue
-            this.setState({ values })
-        }
-    }
-
-    render() {
-
-        return (
-            <div className="calculator">
-                <Display value={this.state.displayValue} />
-                <Button label="AC" click={this.clearMemory} triple />
-                <Button label="/" click={this.setOperation} operation />
-                <Button label="7" click={this.addDigit} />
-                <Button label="8" click={this.addDigit} />
-                <Button label="9" click={this.addDigit} />
-                <Button label="*" click={this.setOperation} operation />
-                <Button label="4" click={this.addDigit} />
-                <Button label="5" click={this.addDigit} />
-                <Button label="6" click={this.addDigit} />
-                <Button label="-" click={this.setOperation} operation />
-                <Button label="1" click={this.addDigit} />
-                <Button label="2" click={this.addDigit} />
-                <Button label="3" click={this.addDigit} />
-                <Button label="+" click={this.setOperation} operation />
-                <Button label="0" click={this.addDigit} double />
-                <Button label="." click={this.addDigit} />
-                <Button label="=" click={this.setOperation} operation />
-            </div>
-        )
-    }
-}
+/* fim de Calculator */

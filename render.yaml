@@ -1,0 +1,13 @@
+# Blueprint do Render: site estático gratuito (CDN, sem hibernação).
+# O build do Create React App vai para ./build; homepage "." deixa os caminhos relativos.
+services:
+  - type: web
+    name: calculadora
+    runtime: static
+    branch: main
+    buildCommand: npm ci && npm run build
+    staticPublishPath: ./build
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+# fim de render.yaml

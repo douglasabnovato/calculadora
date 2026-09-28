@@ -1,11 +1,11 @@
 .calculator {
-    height: 320px;
-    width: 235px;
+    height: 360px;
+    width: min(280px, 100%);
     border-radius: 8px; /* Bordas um pouco mais arredondadas para um visual moderno */
     overflow: hidden;
     display: grid;
     grid-template-columns: repeat(4, 25%);
-    grid-template-rows: 1fr 48px 48px 48px 48px 48px;
+    grid-template-rows: 1fr repeat(5, 52px);
     
     /* Variáveis injetadas pelo Tema global */
     background-color: var(--bg-calculator);

@@ -1,5 +1,5 @@
 <h4 align="center"> 
-  🚧 Calculadora - React.js 🚧
+  Calculadora - React.js
 </h4>   
 
 <p align="center" style="display: flex; align-items: flex-start; justify-content: center;"> 
@@ -15,6 +15,8 @@ Desenvolvimento de uma calculadora web responsiva com forte foco em experiência
   - **Componentização (Dumb vs Smart Components):** Separação clara entre componentes de apresentação estática (`Button`, `Display`, `Header`, `Footer`) e o componente de regra de negócio (`Calculator`, `App`).
   - **Single Source of Truth:** O estado da aplicação (valores numéricos, operação atual e o tema selecionado) é gerenciado de forma centralizada nos componentes pais.
   - **CSS Variables & Theming:** Utilização de variáveis customizadas do CSS (`--var`) controladas dinamicamente pelo estado do React para alternar paletas de cores, sombras e contrastes em tempo de execução.
+- **Máquina de estados finita:** toda a regra de cálculo está em `src/core/calculator.js`, uma função pura `(estado, ação) → estado` usada com `useReducer`. Estados: `first`, `operator`, `second`, `result` e `error` (diagrama em [docs/ARQUITETURA.md](./docs/ARQUITETURA.md)).
+- **Acessibilidade:** visor em `<output aria-live>`, teclas com nome falado ("Dividir", "Apagar último dígito"), foco visível, contraste WCAG AA nos dois temas e teclado físico completo.
 - **Segurança (Tratamento de Débito Técnico):** A função nativa `eval()` foi totalmente removida e substituída por um parser matemático seguro baseado em estrutura de controle (`switch/case`), eliminando vulnerabilidades e o warning `no-eval` do ESLint.
 
 ## 💻 Plano de Ação & Roadmap Executado
@@ -36,37 +38,68 @@ Desenvolvimento de uma calculadora web responsiva com forte foco em experiência
 - [x] 10. Configuração do Design System em `index.css` com paletas dinâmicas para o **Modo Vivo** (contraste aprimorado, display destacado e detalhes em vermelho vivo inspirados em referências de alto padrão) e **Modo Dark** (gradientes profundos e botões estilizados).
 - [x] 11. Estruturação global em Layout Flexbox (`column`) empilhando Header, Main e Footer perfeitamente.
 
-### Fase 4: Testes e Cobertura (Próximo Passo)
-- [ ] Implementação de testes unitários para a lógica da máquina de estados.
-- [ ] Implementação de testes de integração e comportamento da interface (interação com os botões e alternância de temas).
+### Fase 4: Máquina de Estados, Acessibilidade e Testes (Concluído em 27/09/2026)
+- [x] 12. Máquina de estados finita pura (`src/core/calculator.js`): nova conta após "=", vírgula segura, troca de operador, "=" repetido e erro de divisão por zero.
+- [x] 13. Teclado físico (números, `+ - * /`, Enter, Backspace, Esc) e tecla ⌫.
+- [x] 14. Visor em português (vírgula decimal) com a expressão pendente ("12 ×").
+- [x] 15. Acessibilidade WCAG 2.2 AA verificada com axe-core nos dois temas.
+- [x] 16. Tema segue a preferência do sistema e fica salvo no navegador.
+- [x] 17. Atualização para React 18 e react-scripts 5 (sem `--openssl-legacy-provider`).
+- [x] 18. Testes unitários da máquina de estados e testes de interface.
+
+## ▶️ Como executar
+
+```bash
+npm install
+npm start                       # http://localhost:3000
+npm test -- --watchAll=false    # 28 testes
+npm run build                   # pasta build/ pronta para GitHub Pages ou Vercel (gratuitos)
+```
+
+## 🌐 Em produção
+
+**Demonstração:** https://calculadora.onrender.com
+
+- Site estático gratuito no Render (CDN, não hiberna), configurado em `render.yaml`: `npm ci && npm run build`, publicação de `./build`.
+- Cada push na `main` gera um novo deploy.
+- Passo a passo completo: [docs/DEPLOY.md](docs/DEPLOY.md).
+
+## 📊 Estado do MVP & Documentação
+
+| Documento | Conteúdo |
+|---|---|
+| [docs/ANALISE.md](./docs/ANALISE.md) | Requisitos, diagnóstico, rubrica e BDD |
+| [docs/ARQUITETURA.md](./docs/ARQUITETURA.md) | C4, diagrama da máquina de estados, contrato de teclado e ADRs |
+| [docs/PLANO-DE-ACAO.md](./docs/PLANO-DE-ACAO.md) | Tarefas priorizadas por MoSCoW |
+
+| Momento | Nota MVP | Situação |
+|---|---|---|
+| Antes (27/09/2026) | 5,44 | Reprovado — vírgula após "=" quebrava a tela e divisão por zero mostrava 0 |
+| Depois (27/09/2026) | 8,90 | Aprovado |
  
 ## 🚀 Tecnologias e Recursos
 - Favicon personalizado
 - Configuração de idioma e meta tags
-- Fontes Google Roboto via link
+- Fonte Google Roboto via link
 - [Gradiente uiGradients](https://uigradients.com/#CitrusPeel) (Referência de base)
 - Sistema dinâmico de Variáveis CSS
 - Layout estruturado com **CSS Grid** (teclado) e **Flexbox** (estrutura da SPA)
 
 ## 🚀 Testes e Cobertura
 
-Arquivos de **Calculator.test.js** e **App.test.js** e o resultado em **test-results.log**.
-
-Missão cumprida! O projeto saiu de uma calculadora simples para uma SPA com arquitetura limpa, Design System dinâmico, sem débitos técnicos e com 100% de cobertura nos testes essenciais.
+Arquivos `src/core/calculator.test.js` (máquina de estados), `src/main/Calculator.test.js` (interface e teclado) e `src/App.test.js` (tema e layout).
 
 ### 🧪 Evidência de Cobertura de Testes
 
 Os testes automatizados foram executados em ambiente isolado via Jest e React Testing Library. A suíte completa passou com 100% de sucesso em todas as verificações:
 
 ```text
+PASS src/core/calculator.test.js
 PASS src/main/Calculator.test.js
 PASS src/App.test.js
 
-Test Suites: 2 passed, 2 total
-Tests:       6 passed, 6 total
-Snapshots:   0 total
-Time:        3.59 s
-Ran all test suites.
+Test Suites: 3 passed, 3 total
+Tests:       28 passed, 28 total
 ```
 
 

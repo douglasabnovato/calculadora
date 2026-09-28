@@ -1,14 +1,34 @@
+/* Display · visor em duas linhas: expressão e valor */
 .display {
     grid-column: span 4;
     display: flex;
+    flex-direction: column;
     justify-content: flex-end;
-    align-items: center;
-    padding: 20px;
-    font-size: 2.1em;
+    align-items: flex-end;
+    padding: 12px 20px;
     overflow: hidden;
-    
-    /* Variáveis injetadas pelo Tema global */
     background-color: var(--bg-display);
     color: var(--text-display);
     transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+.display-expression {
+    min-height: 1.2em;
+    font-size: 0.95rem;
+    opacity: 0.75;
+}
+
+.display-value {
+    font-size: 2.1em;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.display-error .display-value {
+    font-size: 1rem;
+    white-space: normal;
+    text-align: right;
+}
+/* fim de Display.css */

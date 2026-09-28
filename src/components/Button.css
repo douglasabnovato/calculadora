@@ -1,7 +1,6 @@
 .button {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     border: none;
-    outline: none;
     cursor: pointer;
     
     /* Variáveis injetadas pelo Tema global */
@@ -33,4 +32,10 @@
 
 .button.operation:active {
     opacity: 0.8;
+}
+
+/* Foco visível para navegação por teclado (WCAG 2.4.7) */
+.button:focus-visible {
+    outline: 3px solid var(--focus-ring);
+    outline-offset: -3px;
 }
