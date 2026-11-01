@@ -1,4 +1,4 @@
-> **Projeto de estudo.** Estado conferido em 30/10/2026: 1 endereço(s) citado(s) abaixo não responde(m). Detalhes em [docs/AVALIACAO.md](docs/AVALIACAO.md) e próximos passos em [docs/PLANO-ESTRATEGICO.md](docs/PLANO-ESTRATEGICO.md).
+> **Projeto de estudo.** Estado conferido em 30/10/2026: Detalhes em [docs/AVALIACAO.md](docs/AVALIACAO.md) e próximos passos em [docs/PLANO-ESTRATEGICO.md](docs/PLANO-ESTRATEGICO.md).
 
 <h4 align="center"> 
   Calculadora - React.js
@@ -60,7 +60,7 @@ npm run build                   # pasta build/ pronta para GitHub Pages ou Verce
 
 ## 🌐 Em produção
 
-**Demonstração:** https://calculadora.onrender.com
+**Demonstração:** https://calculadora-thema.netlify.app/
 
 - Site estático gratuito no Render (CDN, não hiberna), configurado em `render.yaml`: `npm ci && npm run build`, publicação de `./build`.
 - Cada push na `main` gera um novo deploy.
