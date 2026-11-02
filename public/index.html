@@ -9,15 +9,21 @@
     <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicon-32x32.png" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/apple-touch-icon.png" />
     <link rel="manifest" href="%PUBLIC_URL%/site.webmanifest" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!-- Fonte fora do caminho de bloqueio: a tela pinta antes, com a fonte do sistema -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+    <!-- Fonte só depois do load: pedir o CSS dela antes atrasava a primeira pintura em cerca de 2 s no perfil móvel -->
+    <script>
+      window.addEventListener("load", function () {
+        var font = document.createElement("link");
+        font.rel = "stylesheet";
+        font.href = "https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap";
+        document.head.appendChild(font);
+      });
+    </script>
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" /></noscript>
     <title>Calculadora · calcAPP</title>
   </head>
   <body>
     <noscript>Ative o JavaScript para usar a calculadora.</noscript>
-    <div id="root"></div>
+    <!-- Primeira pintura sem esperar o JavaScript; o React substitui este conteúdo ao montar -->
+    <div id="root"><div class="app-container vivo"><header class="header"><div class="logo" aria-label="calc APP"><span class="logo-highlight">calc</span><span class="logo-text">APP</span></div><button type="button" class="theme-toggle" aria-pressed="false"><span aria-hidden="true">🌙 </span>Modo Dark</button></header><main class="main-content"><h1 class="sr-only">Calculadora</h1><section class="calculator" aria-label="Calculadora"><div class="display "><span class="display-expression" aria-hidden="true"></span><output class="display-value" aria-live="polite">0</output></div><button type="button" class="button double" aria-label="Limpar tudo">AC</button><button type="button" class="button" aria-label="Apagar último dígito">⌫</button><button type="button" class="button operation" aria-label="Dividir">÷</button><button type="button" class="button">7</button><button type="button" class="button">8</button><button type="button" class="button">9</button><button type="button" class="button operation" aria-label="Multiplicar">×</button><button type="button" class="button">4</button><button type="button" class="button">5</button><button type="button" class="button">6</button><button type="button" class="button operation" aria-label="Subtrair">−</button><button type="button" class="button">1</button><button type="button" class="button">2</button><button type="button" class="button">3</button><button type="button" class="button operation" aria-label="Somar">+</button><button type="button" class="button double">0</button><button type="button" class="button" aria-label="Vírgula decimal">,</button><button type="button" class="button operation" aria-label="Igual">=</button></section></main><footer class="footer"><p>Feito com ❤️ por Douglas A B Novato 👋🏽 <a href="https://www.linkedin.com/in/douglasabnovato/" target="_blank" rel="noopener noreferrer">Entre em contato!</a></p></footer></div></div>
   </body>
 </html>
