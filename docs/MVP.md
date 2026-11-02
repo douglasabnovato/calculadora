@@ -18,7 +18,7 @@
 | 4 | Escopo enxuto | O que não entra está registrado | Atende |
 | 5 | Medição de uso | A métrica principal é coletada | Não se aplica a estudo |
 | 6 | Falhas tratadas | Erro, vazio e carregamento têm resposta clara | Atende: divisão por zero e estouro têm mensagem, anunciada com `role=alert` e coberta por teste |
-| 7 | Desempenho aceitável | LCP de até 2,5 s no celular | Parcial: mediana de 3,35 s antes de tirar a fonte do bloqueio (22,6, 2,79 e 3,35 s); PR aplicado, ver a medição abaixo |
+| 7 | Desempenho aceitável | LCP de até 2,5 s no celular | Não atende: mediana de 3,19 s (3,19, 3,20 e 3,14 s) depois de tirar a fonte do bloqueio; antes, 3,35 s |
 | 8 | Acessibilidade básica | Lighthouse e teclado | Atende: Lighthouse 100, axe sem violações e foco visível em todos os elementos alcançados por Tab (20 elementos) |
 | 9 | Segurança e conformidade | Riscos decididos; termos de terceiros cumpridos | Atende: sem dados |
 | 10 | Entrega confiável | Publicação só depois de CI verde | Parcial: CI ativo; a Netlify não depende dele; `main` sem proteção |
@@ -39,4 +39,4 @@ Histórico, memória e calculadora científica. A lista é uma proposta e pode m
 
 ## Medições de 02/11/2026
 
-Antes da mudança: mediana do LCP de 3,35 s, desempenho 76, acessibilidade 100. Lighthouse 12.8.2 local, perfil móvel simulado, sem aparelho real.
+Antes da mudança: mediana do LCP de 3,35 s, desempenho 76. Depois: 3,19 s, desempenho 87, acessibilidade 100. Lighthouse 12.8.2 local, perfil móvel simulado, sem aparelho real.
