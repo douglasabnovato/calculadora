@@ -17,9 +17,9 @@
 | 3 | Fluxo principal completo | Uma pessoa conclui sem ajuda | Atende: testes passam e o site responde na Netlify |
 | 4 | Escopo enxuto | O que não entra está registrado | Atende |
 | 5 | Medição de uso | A métrica principal é coletada | Não se aplica a estudo |
-| 6 | Falhas tratadas | Erro, vazio e carregamento têm resposta clara | Parcial: regras testadas; o erro de divisão não foi revisto neste ciclo |
-| 7 | Desempenho aceitável | LCP de até 2,5 s no celular | Não medido neste ciclo |
-| 8 | Acessibilidade básica | Lighthouse e teclado | Parcial: `aria-live`, nomes das teclas e contraste no README; não medido |
+| 6 | Falhas tratadas | Erro, vazio e carregamento têm resposta clara | Atende: divisão por zero e estouro têm mensagem, anunciada com `role=alert` e coberta por teste |
+| 7 | Desempenho aceitável | LCP de até 2,5 s no celular | Parcial: mediana de 3,35 s antes de tirar a fonte do bloqueio (22,6, 2,79 e 3,35 s); PR aplicado, ver a medição abaixo |
+| 8 | Acessibilidade básica | Lighthouse e teclado | Atende: Lighthouse 100, axe sem violações e foco visível em todos os elementos alcançados por Tab (20 elementos) |
 | 9 | Segurança e conformidade | Riscos decididos; termos de terceiros cumpridos | Atende: sem dados |
 | 10 | Entrega confiável | Publicação só depois de CI verde | Parcial: CI ativo; a Netlify não depende dele; `main` sem proteção |
 | 11 | Testes dos fluxos críticos | Testes automatizados no CI | Atende: regras e tela |
@@ -31,8 +31,12 @@
 
 | # | Tarefa | Situação |
 |---|---|---|
-| 1 | Corrigir o link da demo e tirar o log de testes do Git | PR aberto |
+| 1 | Corrigir o link da demo e tirar o log de testes do Git | Feito |
 
 ## 3. Fora do MVP
 
 Histórico, memória e calculadora científica. A lista é uma proposta e pode mudar com a decisão do responsável.
+
+## Medições de 02/11/2026
+
+Antes da mudança: mediana do LCP de 3,35 s, desempenho 76, acessibilidade 100. Lighthouse 12.8.2 local, perfil móvel simulado, sem aparelho real.
