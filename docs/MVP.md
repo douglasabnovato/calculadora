@@ -18,7 +18,7 @@
 | 4 | Escopo enxuto | O que não entra está registrado | Atende |
 | 5 | Medição de uso | A métrica principal é coletada | Não se aplica a estudo |
 | 6 | Falhas tratadas | Erro, vazio e carregamento têm resposta clara | Atende: divisão por zero e estouro têm mensagem, anunciada com `role=alert` e coberta por teste |
-| 7 | Desempenho aceitável | LCP de até 2,5 s no celular | Não atende: mediana de 3,19 s (3,19, 3,20 e 3,14 s) depois de tirar a fonte do bloqueio; antes, 3,35 s |
+| 7 | Desempenho aceitável | LCP de até 2,5 s no celular | Atende: mediana de 1,68 s no site publicado em 02/11/2026 (1,11, 1,68, 3,09, 3,03 e 1,24 s), com variação entre execuções; antes, 3,03 s. Lighthouse local, sem aparelho real. |
 | 8 | Acessibilidade básica | Lighthouse e teclado | Atende: Lighthouse 100, axe sem violações e foco visível em todos os elementos alcançados por Tab (20 elementos) |
 | 9 | Segurança e conformidade | Riscos decididos; termos de terceiros cumpridos | Atende: sem dados |
 | 10 | Entrega confiável | Publicação só depois de CI verde | Parcial: CI ativo; a Netlify não depende dele; `main` sem proteção |
