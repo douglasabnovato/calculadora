@@ -1,4 +1,4 @@
-> **Projeto de estudo.** Estado conferido em 30/10/2026: Detalhes em [docs/AVALIACAO.md](docs/AVALIACAO.md) e próximos passos em [docs/PLANO-ESTRATEGICO.md](docs/PLANO-ESTRATEGICO.md).
+> **Projeto de estudo (N1).** Estado conferido em 03/11/2026: 9 de 10 critérios aplicáveis atendidos, MVP finalizado. Detalhes em [docs/MVP.md](docs/MVP.md) e plano do ciclo em [docs/PLANO-DE-ACAO.md](docs/PLANO-DE-ACAO.md).
 
 <h4 align="center"> 
   Calculadora - React.js
@@ -49,22 +49,34 @@ Desenvolvimento de uma calculadora web responsiva com forte foco em experiência
 - [x] 17. Atualização para React 18 e react-scripts 5 (sem `--openssl-legacy-provider`).
 - [x] 18. Testes unitários da máquina de estados e testes de interface.
 
+### Fase 5: Percentual e troca de sinal (Concluído em 03/11/2026)
+- [x] 19. Tecla `%` no padrão das calculadoras de bolso: `50 + 10 %` dá 55; `80 × 25 %` dá 20.
+- [x] 20. Tecla `±` (troca o sinal sem criar -0). No teclado: `%` e `F9`.
+
+### Próximos passos
+- [ ] Publicar só depois do CI e proteger a `main` ([#18](https://github.com/douglasabnovato/calculadora/issues/18), responsável)
+- [ ] Histórico das contas ([#19](https://github.com/douglasabnovato/calculadora/issues/19))
+- [ ] Copiar o resultado ([#20](https://github.com/douglasabnovato/calculadora/issues/20))
+- [ ] Axe no CI ([#21](https://github.com/douglasabnovato/calculadora/issues/21))
+- [ ] Trocar o Create React App pelo Vite ([#22](https://github.com/douglasabnovato/calculadora/issues/22))
+- [ ] "O que aprendi" e futuro do projeto ([#23](https://github.com/douglasabnovato/calculadora/issues/23), responsável)
+
 ## ▶️ Como executar
 
 ```bash
 npm install
 npm start                       # http://localhost:3000
-npm test -- --watchAll=false    # 28 testes
-npm run build                   # pasta build/ pronta para GitHub Pages ou Vercel (gratuitos)
+npm test -- --watchAll=false    # 41 testes
+npm run build                   # pasta build/ (site estático)
 ```
 
 ## 🌐 Em produção
 
 **Demonstração:** https://calculadora-thema.netlify.app/
 
-- Site estático gratuito no Render (CDN, não hiberna), configurado em `render.yaml`: `npm ci && npm run build`, publicação de `./build`.
-- Cada push na `main` gera um novo deploy.
-- Passo a passo completo: [docs/DEPLOY.md](docs/DEPLOY.md).
+- Site estático gratuito na Netlify, com a pasta `build/` de `npm run build`.
+- Cada push na `main` gera um novo deploy. Hoje a Netlify não espera o CI ([#18](https://github.com/douglasabnovato/calculadora/issues/18)).
+- Histórico do deploy: [docs/DEPLOY.md](docs/DEPLOY.md).
 
 ## 📊 Estado do MVP & Documentação
 
@@ -93,7 +105,7 @@ Arquivos `src/core/calculator.test.js` (máquina de estados), `src/main/Calculat
 
 ### 🧪 Evidência de Cobertura de Testes
 
-Os testes automatizados foram executados em ambiente isolado via Jest e React Testing Library. A suíte completa passou com 100% de sucesso em todas as verificações:
+Jest e React Testing Library, em 03/11/2026 (`CI=true npm test -- --watchAll=false`):
 
 ```text
 PASS src/core/calculator.test.js
@@ -101,7 +113,7 @@ PASS src/main/Calculator.test.js
 PASS src/App.test.js
 
 Test Suites: 3 passed, 3 total
-Tests:       28 passed, 28 total
+Tests:       41 passed, 41 total
 ```
 
 

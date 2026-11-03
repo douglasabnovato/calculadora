@@ -2,6 +2,8 @@
 
 Plano de ação para publicar a calculadora em hospedagem gratuita.
 
+> **Atualização de 03/11/2026:** o site está na Netlify: https://calculadora-thema.netlify.app/. O endereço do Render dava 404 e o `render.yaml` saiu do repositório. A Netlify publica a cada push na `main` sem esperar o CI; ligar a publicação ao CI é do responsável (#18). O plano abaixo fica como histórico.
+
 ## 1. Desafio
 
 Publicar uma SPA em Create React App, sem backend e sem segredos, com deploy automático a cada push e sem custo.
