@@ -1,6 +1,6 @@
 /*
  * Calculator · interface da calculadora; toda regra está na FSM de core/calculator.js.
- * Aceita clique e teclado físico (números, + − × ÷, Enter, Backspace, Esc).
+ * Aceita clique e teclado físico (números, + − × ÷, %, F9 para ±, Enter, Backspace, Esc).
  */
 import React, { useEffect, useReducer } from "react";
 import "./Calculator.css";
@@ -9,8 +9,9 @@ import Display from "../components/Display";
 import { reducer, initialState, displayText, expressionText, keyToAction } from "../core/calculator";
 
 const KEYS = [
-  { label: "AC", aria: "Limpar tudo", action: { type: "CLEAR" }, className: "double" },
-  { label: "⌫", aria: "Apagar último dígito", action: { type: "BACKSPACE" } },
+  { label: "AC", aria: "Limpar tudo", action: { type: "CLEAR" } },
+  { label: "±", aria: "Trocar sinal", action: { type: "NEGATE" } },
+  { label: "%", aria: "Percentual", action: { type: "PERCENT" } },
   { label: "÷", aria: "Dividir", action: { type: "OPERATOR", operator: "/" }, operation: true },
   { label: "7", action: { type: "DIGIT", digit: "7" } },
   { label: "8", action: { type: "DIGIT", digit: "8" } },
@@ -24,7 +25,8 @@ const KEYS = [
   { label: "2", action: { type: "DIGIT", digit: "2" } },
   { label: "3", action: { type: "DIGIT", digit: "3" } },
   { label: "+", aria: "Somar", action: { type: "OPERATOR", operator: "+" }, operation: true },
-  { label: "0", action: { type: "DIGIT", digit: "0" }, className: "double" },
+  { label: "⌫", aria: "Apagar último dígito", action: { type: "BACKSPACE" } },
+  { label: "0", action: { type: "DIGIT", digit: "0" } },
   { label: ",", aria: "Vírgula decimal", action: { type: "DOT" } },
   { label: "=", aria: "Igual", action: { type: "EQUALS" }, operation: true },
 ];

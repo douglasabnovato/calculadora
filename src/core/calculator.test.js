@@ -87,4 +87,43 @@ describe("FSM da calculadora", () => {
     expect(keyToAction("a")).toBeNull();
   });
 });
+
+describe("percentual e troca de sinal", () => {
+  test.each([
+    ["5 0 %", "0,5"],
+    ["5 0 + 1 0 % Enter", "55"],
+    ["2 0 0 - 1 0 % Enter", "180"],
+    ["8 0 * 2 5 % Enter", "20"],
+    ["9 / 5 0 % Enter", "18"],
+  ])("%s = %s", (keys, expected) => {
+    expect(displayText(press(keys))).toBe(expected);
+  });
+
+  test("% em + mostra a parte do 1º número antes do =", () => {
+    expect(displayText(press("5 0 + 1 0 %"))).toBe("5");
+  });
+
+  test("dígito depois de % começa um número novo", () => {
+    expect(displayText(press("5 0 + 1 0 % 3 Enter"))).toBe("53");
+    expect(displayText(press("5 0 % 7"))).toBe("7");
+  });
+
+  test("% sem número digitado e em erro não muda nada", () => {
+    const pending = press("8 +");
+    expect(reducer(pending, keyToAction("%"))).toBe(pending);
+    const error = press("8 / 0 Enter");
+    expect(reducer(error, keyToAction("%"))).toBe(error);
+  });
+
+  test("± troca o sinal do número em digitação e do resultado", () => {
+    expect(displayText(press("5 F9"))).toBe("-5");
+    expect(displayText(press("5 F9 F9"))).toBe("5");
+    expect(displayText(press("8 + 3 F9 Enter"))).toBe("5");
+    expect(displayText(press("2 + 3 Enter F9"))).toBe("-5");
+  });
+
+  test("± no zero não cria -0", () => {
+    expect(displayText(press("F9"))).toBe("0");
+  });
+});
 /* fim de calculator.test.js */

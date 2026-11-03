@@ -33,5 +33,28 @@ describe("Calculator", () => {
     ["8", "/", "0", "Enter"].forEach((key) => fireEvent.keyDown(window, { key }));
     expect(screen.getByRole("alert")).toHaveTextContent("Não é possível dividir por zero");
   });
+
+  test("percentual e troca de sinal por clique", () => {
+    const { container } = render(<Calculator />);
+    ["2", "0", "0", "Somar", "1", "0", "Percentual", "Igual"].forEach((name) =>
+      fireEvent.click(screen.getByRole("button", { name }))
+    );
+    expect(container.querySelector("output")).toHaveTextContent("220");
+    fireEvent.click(screen.getByRole("button", { name: "Trocar sinal" }));
+    expect(container.querySelector("output")).toHaveTextContent("-220");
+  });
+
+  test("teclado aceita % e F9", () => {
+    const { container } = render(<Calculator />);
+    ["5", "0", "%"].forEach((key) => fireEvent.keyDown(window, { key }));
+    expect(container.querySelector("output")).toHaveTextContent("0,5");
+    fireEvent.keyDown(window, { key: "F9" });
+    expect(container.querySelector("output")).toHaveTextContent("-0,5");
+  });
+
+  test("teclado completo: 20 teclas na grade 4 × 5", () => {
+    render(<Calculator />);
+    expect(screen.getAllByRole("button")).toHaveLength(20);
+  });
 });
 /* fim de Calculator.test.js */

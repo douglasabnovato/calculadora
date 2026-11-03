@@ -1,6 +1,7 @@
 /*
  * calculator.js · máquina de estados finita (FSM) da calculadora, pura e sem React.
  * Estados: first (1º número), operator (operação escolhida), second (2º número), result (após =), error.
+ * `fresh` marca um valor vindo de % : o próximo dígito começa um número novo em vez de concatenar.
  * Toda transição é uma função (estado, ação) → novo estado, o que torna cada regra testável isoladamente.
  */
 export const MAX_DIGITS = 12;
@@ -13,6 +14,7 @@ export const initialState = {
   lastOperator: null,
   lastOperand: null,
   error: null,
+  fresh: false,
 };
 
 const SYMBOLS = { "+": "+", "-": "−", "*": "×", "/": "÷" };
@@ -59,11 +61,33 @@ function settle(state, left, operator, right, next) {
   }
 }
 
-/* Função de transição da FSM. */
+/* Troca o sinal do texto do visor ("5" ↔ "-5"); zero não ganha sinal. */
+function negateText(text) {
+  if (Number(text) === 0) return text;
+  return text.startsWith("-") ? text.slice(1) : `-${text}`;
+}
+
+/* Percentual: em + e − é a parte do 1º número (50 + 10 % = 50 + 5); em × e ÷ e sozinho, valor / 100. */
+function percentOf(state) {
+  const value = Number(state.display);
+  if (state.phase === "second" && (state.operator === "+" || state.operator === "-")) {
+    return (state.accumulator * value) / 100;
+  }
+  return value / 100;
+}
+
+/* Função de transição da FSM. Só % e ± mantêm `fresh`; as demais ações o desligam. */
 export function reducer(state, action) {
+  const next = transition(state, action);
+  if (next.fresh && action.type !== "PERCENT" && action.type !== "NEGATE") return { ...next, fresh: false };
+  return next;
+}
+
+function transition(state, action) {
   switch (action.type) {
     case "DIGIT": {
       if (state.phase === "operator") return { ...state, phase: "second", display: action.digit };
+      if (state.fresh) return { ...state, display: action.digit };
       if (state.phase === "result" || state.phase === "error") {
         return { ...initialState, display: action.digit };
       }
@@ -75,6 +99,7 @@ export function reducer(state, action) {
     case "DOT": {
       if (state.phase === "operator") return { ...state, phase: "second", display: "0." };
       if (state.phase === "result" || state.phase === "error") return { ...initialState, display: "0." };
+      if (state.fresh) return { ...state, display: "0." };
       if (state.display.includes(".")) return state;
       return { ...state, display: `${state.display}.` };
     }
@@ -114,6 +139,18 @@ export function reducer(state, action) {
       return { ...state, display: display === "" || display === "-" ? "0" : display };
     }
 
+    case "NEGATE": {
+      if (state.phase === "operator" || state.phase === "error") return state;
+      return { ...state, display: negateText(state.display) };
+    }
+
+    case "PERCENT": {
+      if (state.phase === "operator" || state.phase === "error") return state;
+      const value = percentOf(state);
+      if (state.phase === "second") return { ...state, display: formatNumber(value), fresh: true };
+      return { ...state, phase: "result", display: formatNumber(value), lastOperator: null, lastOperand: null, fresh: false };
+    }
+
     case "CLEAR":
       return { ...initialState };
 
@@ -143,6 +180,8 @@ export function keyToAction(key) {
   if (key === "Enter" || key === "=") return { type: "EQUALS" };
   if (key === "Backspace") return { type: "BACKSPACE" };
   if (key === "Escape" || key === "Delete") return { type: "CLEAR" };
+  if (key === "%") return { type: "PERCENT" };
+  if (key === "F9") return { type: "NEGATE" };
   return null;
 }
 /* fim de calculator.js */
