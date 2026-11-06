@@ -8,6 +8,30 @@
   <img alt="Calculadora" title="#Calculadora" src="./.github/tela-1.jpg" width="600px"> 
 </p> 
 
+## Estado e próximos passos (ciclo de 03/11/2026)
+
+Site publicado: [calculadora-thema.netlify.app](https://calculadora-thema.netlify.app/) (HTTP 200 em 06/11/2026).
+
+**O que foi feito**
+- Teclas `%` e `±`, com teclado e testes ([#24](https://github.com/douglasabnovato/calculadora/pull/24)).
+- Régua N1 no `docs/MVP.md`, com evidência por linha ([#24](https://github.com/douglasabnovato/calculadora/pull/24)).
+- CI também nos PRs para a `developer` ([#24](https://github.com/douglasabnovato/calculadora/pull/24)).
+- README e `docs/DEPLOY.md` com a Netlify; sai o `render.yaml` ([#24](https://github.com/douglasabnovato/calculadora/pull/24)).
+- Tela pinta sem esperar fonte, CSS externo nem JavaScript ([#12](https://github.com/douglasabnovato/calculadora/pull/12), [#14](https://github.com/douglasabnovato/calculadora/pull/14)).
+- LCP do site publicado registrado ([#16](https://github.com/douglasabnovato/calculadora/pull/16)).
+
+**O que queremos fazer**
+- [#18](https://github.com/douglasabnovato/calculadora/issues/18) Publicar na Netlify só depois do CI e proteger a `main` (responsável).
+- [#23](https://github.com/douglasabnovato/calculadora/issues/23) Registrar o que o projeto ensinou e decidir o futuro dele (responsável).
+- [#19](https://github.com/douglasabnovato/calculadora/issues/19) Histórico das últimas contas da sessão.
+- [#20](https://github.com/douglasabnovato/calculadora/issues/20) Copiar o resultado para a área de transferência.
+- [#21](https://github.com/douglasabnovato/calculadora/issues/21) Checagem de acessibilidade com axe no CI.
+- [#22](https://github.com/douglasabnovato/calculadora/issues/22) Trocar o Create React App pelo Vite.
+
+**Onde está a documentação**
+- Estado e critérios: [docs/MVP.md](docs/MVP.md).
+- Plano do ciclo: [docs/PLANO-DE-ACAO.md](docs/PLANO-DE-ACAO.md), seção "Ciclo de 03/11/2026".
+
 ## 🎯 Visão do Produto
 Desenvolvimento de uma calculadora web responsiva com forte foco em experiência de usuário (UX). O projeto evoluiu de um componente isolado para uma Single Page Application (SPA) profissional, incorporando um design system moderno com cabeçalho, rodapé e sistema dinâmico de troca de temas (*Theme Switcher* entre o Modo Vivo e o Modo Dark).
 
