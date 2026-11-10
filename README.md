@@ -1,4 +1,4 @@
-> **Projeto de estudo (N1).** Estado conferido em 03/11/2026: 9 de 10 critérios aplicáveis atendidos, MVP finalizado. Detalhes em [docs/MVP.md](docs/MVP.md) e plano do ciclo em [docs/PLANO-DE-ACAO.md](docs/PLANO-DE-ACAO.md).
+> **Projeto de estudo (N1).** Estado conferido em 10/11/2026: 9 de 10 critérios aplicáveis atendidos, MVP finalizado. A `main` está protegida desde 10/11/2026. Detalhes em [docs/MVP.md](docs/MVP.md) e plano do ciclo em [docs/PLANO-DE-ACAO.md](docs/PLANO-DE-ACAO.md).
 
 <h4 align="center"> 
   Calculadora - React.js
@@ -21,7 +21,7 @@ Site publicado: [calculadora-thema.netlify.app](https://calculadora-thema.netlif
 - LCP do site publicado registrado ([#16](https://github.com/douglasabnovato/calculadora/pull/16)).
 
 **O que queremos fazer**
-- [#18](https://github.com/douglasabnovato/calculadora/issues/18) Publicar na Netlify só depois do CI e proteger a `main` (responsável).
+- [#18](https://github.com/douglasabnovato/calculadora/issues/18) Publicar na Netlify só depois do CI (responsável). A proteção da `main` saiu em 10/11/2026.
 - [#23](https://github.com/douglasabnovato/calculadora/issues/23) Registrar o que o projeto ensinou e decidir o futuro dele (responsável).
 - [#19](https://github.com/douglasabnovato/calculadora/issues/19) Histórico das últimas contas da sessão.
 - [#20](https://github.com/douglasabnovato/calculadora/issues/20) Copiar o resultado para a área de transferência.
@@ -78,7 +78,8 @@ Desenvolvimento de uma calculadora web responsiva com forte foco em experiência
 - [x] 20. Tecla `±` (troca o sinal sem criar -0). No teclado: `%` e `F9`.
 
 ### Próximos passos
-- [ ] Publicar só depois do CI e proteger a `main` ([#18](https://github.com/douglasabnovato/calculadora/issues/18), responsável)
+- [x] Proteger a `main` (ruleset `principal-protegida`, 10/11/2026)
+- [ ] Publicar só depois do CI ([#18](https://github.com/douglasabnovato/calculadora/issues/18), responsável)
 - [ ] Histórico das contas ([#19](https://github.com/douglasabnovato/calculadora/issues/19))
 - [ ] Copiar o resultado ([#20](https://github.com/douglasabnovato/calculadora/issues/20))
 - [ ] Axe no CI ([#21](https://github.com/douglasabnovato/calculadora/issues/21))
