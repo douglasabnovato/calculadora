@@ -4,7 +4,9 @@
 
 **Nível:** Estudo (N1). Os critérios 5 e 7 não se aplicam e saem da conta.
 
-**Finalizado:** sim. Todos os critérios aplicáveis atendem, menos o 10, que depende do responsável e tem a issue #18 (`depende-do-responsavel`).
+**Resumo:** 9 de 10 aplicáveis atendidos
+
+**Finalizado:** sim. Todos os critérios aplicáveis atendem, menos o 10, que depende do responsável e tem a issue #18 (`depende-do-responsavel`). Desde 10/11/2026 a `main` está protegida; falta a Netlify publicar só depois do CI.
 
 ## Problema e hipótese
 
@@ -25,11 +27,11 @@
 | 7 | Desempenho aceitável | LCP de até 2,5 s no celular | Não se aplica (N1) | Registro: mediana de 1,68 s no site publicado em 02/11/2026 |
 | 8 | Acessibilidade básica | Lighthouse e teclado | Atende | Lighthouse 100 em 02/11; foco visível; teclas novas com nome falado ("Percentual", "Trocar sinal") |
 | 9 | Segurança e conformidade | Riscos decididos; termos de terceiros cumpridos | Atende | Sem dados, sem `eval` |
-| 10 | Entrega confiável | Publicação só depois de CI verde | Parcial: CI ativo também na `developer`; a Netlify não espera o CI; `main` sem proteção | #18 (responsável) |
+| 10 | Entrega confiável | Publicação só depois de CI verde | Parcial: a `main` está protegida e o workflow `CI` roda nos PRs para a `main` e a `developer/**`; falta a Netlify esperar o CI | `gh api repos/douglasabnovato/calculadora/rulesets` em 10/11/2026: ruleset `principal-protegida` ativo (exige PR, bloqueia force push e exclusão); #18 (responsável, parte da Netlify) |
 | 11 | Testes dos fluxos críticos | Testes automatizados no CI | Atende | 41 testes: regras, tela e teclado |
 | 12 | Documentação honesta | Qualquer pessoa roda o projeto, e os números estão certos | Atende | README com Netlify, 41 testes e próximos passos (03/11) |
 
-**Resultado:** 9 de 10 critérios aplicáveis atendidos. O 10 é parcial e depende do responsável (#18).
+**Resultado:** 9 de 10 critérios aplicáveis atendidos. O 10 é parcial: a proteção da `main` saiu em 10/11/2026, e a Netlify esperar o CI depende do responsável (#18).
 
 ## 2. Tarefas
 
