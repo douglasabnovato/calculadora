@@ -4,9 +4,9 @@
 
 **Nível:** Estudo (N1). Os critérios 5 e 7 não se aplicam e saem da conta.
 
-**Resumo:** 10 de 10 aplicáveis atendidos
+**Resumo:** 9 de 10 aplicáveis atendidos
 
-**Finalizado:** sim
+**Finalizado:** sim. O único critério fora de "Atende" (9) depende do responsável e tem issue com `depende-do-responsavel` (#31).
 
 ## Problema e hipótese
 
@@ -30,7 +30,7 @@
 | 6 | Falhas tratadas | Atende | `CI=true npm test -- --watchAll=false` em 16/11/2026: 51 passed. Divisão por zero e estouro com `role=alert`; `%` e `±` ignorados em erro (`calculator.test.js`); cópia sem Clipboard API ou com permissão negada mostra erro claro (`clipboard.test.js`, `Calculator.test.js` e o 5º teste do `fluxo.e2e.js`). Sem rede nem lista: não há carregamento a tratar |
 | 7 | Desempenho aceitável | Não se aplica (N1) | Registro antigo: mediana de LCP de 1,68 s no site publicado em 02/11/2026 |
 | 8 | Acessibilidade básica | Atende | `npm run test:e2e` em 16/11/2026: axe (WCAG 2.2 AA) sem violações nos temas Vivo e Dark, no erro, em 1280 px; Tab chega ao botão de tema, ao "Copiar resultado" e à tecla AC, e o teste mede o contorno de foco nos três (pelo menos 2 px; o CSS usa 3 px); Esc limpa. O axe achou `label-content-name-mismatch` na tecla AC, corrigido no ciclo. Job `e2e` verde no [run 43802742117](https://github.com/douglasabnovato/calculadora/actions/runs/43802742117) |
-| 9 | Segurança e conformidade | Atende | `npm audit --omit=dev` em 16/11/2026: 0 vulnerabilidades (passo no job `raiz`, verde no [run 43802742117](https://github.com/douglasabnovato/calculadora/actions/runs/43802742117)). Alertas do Dependabot: a API devolve 403 (desligados); com eles desligados, o `npm audit --omit=dev` é a única fonte, como registra `aprendizados.md`. Ligar é do responsável (#31). Sem dados pessoais, sem segredo, sem `eval`. Os alertas do `react-scripts` ficam nas ferramentas de build (#22) |
+| 9 | Segurança e conformidade | Parcial | `npm audit --omit=dev` 0 (16/11/2026: 0 vulnerabilidades, local e no job `raiz`, verde no [run 43802742117](https://github.com/douglasabnovato/calculadora/actions/runs/43802742117)); os alertas do Dependabot estão desligados (API 403) e a regra está em decisão na [engenharia#33](https://github.com/douglasabnovato/engenharia/issues/33). Ligar os alertas é do responsável (#31). Sem dados pessoais, sem segredo, sem `eval`. Os alertas do `react-scripts` ficam nas ferramentas de build (#22) |
 | 10 | Entrega confiável | Atende | `gh api repos/douglasabnovato/calculadora/rulesets/26932504` em 16/11/2026: `principal-protegida` ativo, com `pull_request`, `non_fast_forward`, `deletion` e o check `raiz` obrigatório. CI em PR e push para `main` e `developer/**`. Melhorias: Netlify esperar o run da `main` (#18) e exigir o `e2e` no ruleset (#30, responsável) |
 | 11 | Testes dos fluxos críticos | Atende | Jobs `raiz` (51 testes Jest) e `e2e` (5 testes Playwright) no CI, verdes no [run 43802742117](https://github.com/douglasabnovato/calculadora/actions/runs/43802742117), sem `skip` no código (`grep -rn "skip" src e2e` sem resultado em 16/11/2026) |
 | 12 | Documentação honesta | Atende | README com comandos conferidos contra o `package.json` (`start`, `test`, `build`, `test:e2e`) em 16/11/2026; link publicado com HTTP 200 e `<title>Calculadora · calcAPP</title>` em 16/11/2026; `docs/DEPLOY.md` com o passo a passo |
