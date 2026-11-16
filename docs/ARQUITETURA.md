@@ -89,6 +89,10 @@ Regras numéricas:
 - **Decisão:** as teclas da calculadora usam `onMouseDown` com `preventDefault`.
 - **Consequência:** quem clica em "3" e aperta Enter recebe "=" em vez de repetir o "3"; quem navega por Tab continua focando e acionando as teclas normalmente.
 
+### ADR-004 — Aceitar os alertas de desenvolvimento do Dependabot
+
+Registrada em arquivo próprio: [`adr/ADR-004-alertas-de-desenvolvimento-aceitos.md`](adr/ADR-004-alertas-de-desenvolvimento-aceitos.md). Os 21 alertas presos ao `react-scripts` 5.0.1 não chegam ao site (16/11/2026).
+
 ## 6. Fora do escopo
 
 - Porcentagem, troca de sinal, memória (M+/M−) e histórico de contas.

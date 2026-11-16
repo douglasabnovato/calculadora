@@ -1,12 +1,12 @@
 # MVP — Calculadora
 
-> Criado em 31/10/2026. Revisto em 16/11/2026 contra a régua de `engenharia/arquitetura/padroes.md` (plano em `docs/PLANO-DE-ACAO.md`, seção "Ciclo de 16/11/2026"). Critério 9 revisto em 16/11/2026, 12:00, com os alertas do Dependabot ligados.
+> Criado em 31/10/2026. Revisto em 16/11/2026 contra a régua de `engenharia/arquitetura/padroes.md` (plano em `docs/PLANO-DE-ACAO.md`, seção "Ciclo de 16/11/2026"). Critério 9 revisto em 16/11/2026, 12:00, com os alertas do Dependabot ligados, e às 14:58, com os alertas de desenvolvimento aceitos na ADR-004.
 
 **Nível:** Estudo (N1). Os critérios 5 e 7 não se aplicam e saem da conta.
 
-**Resumo:** 9 de 10 aplicáveis atendidos
+**Resumo:** 10 de 10 aplicáveis atendidos
 
-**Finalizado:** não. O único critério fora de "Atende" é o 9: o responsável ligou os alertas do Dependabot em 16/11/2026, e 21 dos 51 seguem sem correção nem decisão escrita (#38). Antes desta revisão: sim, porque o 9 dependia só da #31.
+**Finalizado:** sim. Todos os 10 critérios aplicáveis estão em "Atende" (16/11/2026, 14:58). O 9 chegou lá pela regra geral do responsável para os alertas: os 21 de desenvolvimento estão aceitos na [ADR-004](adr/ADR-004-alertas-de-desenvolvimento-aceitos.md), e os outros 30 têm correção na sprint-19 (PR #39).
 
 ## Problema e hipótese
 
@@ -30,7 +30,7 @@
 | 6 | Falhas tratadas | Atende | `CI=true npm test -- --watchAll=false` em 16/11/2026: 51 passed. Divisão por zero e estouro com `role=alert`; `%` e `±` ignorados em erro (`calculator.test.js`); cópia sem Clipboard API ou com permissão negada mostra erro claro (`clipboard.test.js`, `Calculator.test.js` e o 5º teste do `fluxo.e2e.js`). Sem rede nem lista: não há carregamento a tratar |
 | 7 | Desempenho aceitável | Não se aplica (N1) | Registro antigo: mediana de LCP de 1,68 s no site publicado em 02/11/2026 |
 | 8 | Acessibilidade básica | Atende | `npm run test:e2e` em 16/11/2026: axe (WCAG 2.2 AA) sem violações nos temas Vivo e Dark, no erro, em 1280 px; Tab chega ao botão de tema, ao "Copiar resultado" e à tecla AC, e o teste mede o contorno de foco nos três (pelo menos 2 px; o CSS usa 3 px); Esc limpa. O axe achou `label-content-name-mismatch` na tecla AC, corrigido no ciclo. Job `e2e` verde no [run 43802742117](https://github.com/douglasabnovato/calculadora/actions/runs/43802742117) |
-| 9 | Segurança e conformidade | Parcial | `gh api "repos/douglasabnovato/calculadora/dependabot/alerts?state=open&per_page=100"`, 16/11/2026, 12:00: 51 alertas abertos, todos de desenvolvimento (1 crítico, 16 altos, 24 médios, 10 baixos). 30 alertas corrigidos na sprint-19 (PR #39); fecham com o merge na principal; 21 restam (#38), presos ao `react-scripts` 5.0.1 (só saem com versão maior ou com o Vite, #22). `npm audit --omit=dev`, 16/11/2026: 0 vulnerabilidades (nada disso vai para o site). Sem dados pessoais, sem segredo, sem `eval`. Os alertas do `react-scripts` ficam nas ferramentas de build (#22) |
+| 9 | Segurança e conformidade | Atende | `gh api "repos/douglasabnovato/calculadora/dependabot/alerts?state=open&per_page=100"`, 16/11/2026, 14:58: 51 alertas abertos, todos de desenvolvimento. 30 corrigidos na sprint-19 (PR #39); fecham no merge na principal (conferido contra o lockfile da sprint: nenhuma versão vulnerável restante nesses 30). 21 presos ao `react-scripts` 5.0.1 aceitos na [ADR-004](adr/ADR-004-alertas-de-desenvolvimento-aceitos.md): `npm ls` desses pacotes com `--omit=dev` deu `(empty)`. 0 sem decisão. `npm audit --omit=dev --package-lock-only`, 16/11/2026: 0 vulnerabilidades (nada disso vai para o site). Sem dados pessoais, sem segredo, sem `eval`. A migração para o Vite (#22) tira os 21 de vez |
 | 10 | Entrega confiável | Atende | `gh api repos/douglasabnovato/calculadora/rulesets/26932504` em 16/11/2026: `principal-protegida` ativo, com `pull_request`, `non_fast_forward`, `deletion` e o check `raiz` obrigatório. CI em PR e push para `main` e `developer/**`. Melhorias: Netlify esperar o run da `main` (#18) e exigir o `e2e` no ruleset (#30, responsável) |
 | 11 | Testes dos fluxos críticos | Atende | Jobs `raiz` (51 testes Jest) e `e2e` (5 testes Playwright) no CI, verdes no [run 43802742117](https://github.com/douglasabnovato/calculadora/actions/runs/43802742117), sem `skip` no código (`grep -rn "skip" src e2e` sem resultado em 16/11/2026) |
 | 12 | Documentação honesta | Atende | README com comandos conferidos contra o `package.json` (`start`, `test`, `build`, `test:e2e`) em 16/11/2026; link publicado com HTTP 200 e `<title>Calculadora · calcAPP</title>` em 16/11/2026; `docs/DEPLOY.md` com o passo a passo |
@@ -55,6 +55,7 @@ Memória e calculadora científica. Histórico das contas (#19) e migração par
 
 ## Histórico
 
+- 16/11/2026, 14:58: regra geral por ADR do responsável. Critério 9: Parcial → Atende (21 alertas de desenvolvimento aceitos na ADR-004; 30 corrigidos na sprint-19, PR #39; 0 sem decisão). Resumo 9 → 10 de 10. Finalizado: não → sim.
 - 16/11/2026, 12:00: alertas do Dependabot ligados. Critério 9 segue Parcial, com motivo novo (21 alertas sem correção nem decisão, #38; 30 corrigidos só na sprint, PR #39). Finalizado: sim → não. Resumo segue 9 de 10.
 
 - 03/11/2026: 9 de 10 declarados. A revisão de 16/11 mostrou que 2, 3, 8 e 9 não tinham a evidência da régua (hipótese sem meta; só jsdom, sem Playwright; Lighthouse manual, sem axe no CI; `npm audit --omit=dev` com 43 alertas), e que o 10 já tinha. Contagem honesta antes do ciclo: 6 de 10.
