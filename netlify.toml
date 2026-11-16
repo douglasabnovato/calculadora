@@ -1,0 +1,8 @@
+# Netlify · site estático do Create React App.
+# Fixa no repositório o que antes ficava só no painel. Passo a passo em docs/DEPLOY.md.
+[build]
+  command = "npm run build"
+  publish = "build"
+
+[build.environment]
+  NODE_VERSION = "22"

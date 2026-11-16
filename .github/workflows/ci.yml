@@ -1,4 +1,6 @@
-# Verificação de projeto de estudo: não publica nada
+# Verificação do projeto: testes, build e teste de ponta a ponta no navegador.
+# Publicação: a Netlify publica a main. O job "publicar" só chama o build hook da Netlify
+# se o segredo NETLIFY_BUILD_HOOK existir (passo a passo em docs/DEPLOY.md e na issue #18).
 name: CI
 
 on:
@@ -24,5 +26,44 @@ jobs:
           cache: npm
           cache-dependency-path: package-lock.json
       - run: npm ci
+      - run: npm audit --omit=dev
       - run: npm test
       - run: npm run build
+
+  e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run build
+      - run: npm run test:e2e
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7
+
+  publicar:
+    # Só na main, depois dos dois jobs verdes, e só se o responsável tiver criado o segredo.
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [raiz, e2e]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Chamar o build hook da Netlify
+        env:
+          NETLIFY_BUILD_HOOK: ${{ secrets.NETLIFY_BUILD_HOOK }}
+        run: |
+          if [ -z "$NETLIFY_BUILD_HOOK" ]; then
+            echo "Segredo NETLIFY_BUILD_HOOK ausente: a Netlify segue publicando sozinha (issue #18)."
+            exit 0
+          fi
+          curl --fail --silent --show-error -X POST -d '{}' "$NETLIFY_BUILD_HOOK" > /dev/null
+          echo "Build hook chamado."
