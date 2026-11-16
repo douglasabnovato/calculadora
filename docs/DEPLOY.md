@@ -17,6 +17,8 @@ Atualizado em 16/11/2026.
 | `.github/workflows/ci.yml` | Jobs `raiz` (auditoria, testes, build) e `e2e` (Playwright com axe). O job `publicar` chama o build hook da Netlify só na `main`, depois dos dois, e só se o segredo `NETLIFY_BUILD_HOOK` existir |
 | `package.json` | `"homepage": "."`: caminhos relativos no build |
 
+O job `raiz` roda `npm audit --omit=dev` sem `--audit-level`: qualquer alerta novo numa dependência de produção (`react`, `react-dom`, `web-vitals`) deixa o CI vermelho, mesmo sem mudança no código. É de propósito. Quando quebrar, atualizar a dependência em patch ou minor num PR; se só houver versão maior, abrir issue e decidir.
+
 O `react-scripts` está em `devDependencies`. A Netlify instala as dependências de desenvolvimento por padrão. Não defina `NODE_ENV=production` nas variáveis do site: o build quebraria.
 
 ## Rodar e conferir localmente
@@ -50,8 +52,8 @@ Nada aqui exige plano pago. Não cole o endereço do build hook em issue, PR ou 
 4. **Conferir.**
    1. Depois do próximo merge na `main`, abra **Actions → CI** e veja o job `publicar` com a linha "Build hook chamado.".
    2. Na Netlify, **Deploys** mostra um deploy com a origem "build hook".
-   3. Um commit com teste quebrado numa branch de teste deixa o job `publicar` sem rodar (ele depende de `raiz` e `e2e`).
-5. **Exigir o teste no navegador antes do merge** (issue própria): em **Settings → Rules → Rulesets → principal-protegida → Require status checks to pass**, adicione o check `e2e` ao lado do `raiz` e salve.
+   3. Nos PRs, o job `publicar` aparece como "skipped": ele só roda em push na `main`, com `needs: [raiz, e2e]`. Um teste quebrado não chega à `main`, porque o ruleset exige o `raiz` verde no PR (e o `e2e`, depois da #30).
+5. **Exigir o teste no navegador antes do merge** (#30): em **Settings → Rules → Rulesets → principal-protegida → Require status checks to pass**, adicione o check `e2e` ao lado do `raiz` e salve.
 
 Fontes: [Netlify, Build hooks](https://docs.netlify.com/build/configure-builds/build-hooks/); [Netlify, Ignore builds](https://docs.netlify.com/build/configure-builds/ignore-builds/); [Netlify, variáveis do build (`INCOMING_HOOK_URL`)](https://docs.netlify.com/build/configure-builds/environment-variables/); [Netlify, Stop or activate builds](https://docs.netlify.com/build/configure-builds/stop-or-activate-builds/) (com builds parados, o hook não publica); [Netlify, File-based configuration](https://docs.netlify.com/build/configure-builds/file-based-configuration/).
 

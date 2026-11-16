@@ -45,9 +45,12 @@ export default function Calculator() {
   const [copyMessage, setCopyMessage] = useState("");
   const stateRef = useRef(state);
   stateRef.current = state;
+  /* Muda a cada ação: uma cópia que termina depois de uma ação nova não mostra mensagem velha. */
+  const generationRef = useRef(0);
 
   /* Toda ação nova apaga a mensagem da cópia anterior. */
   const run = useCallback((action) => {
+    generationRef.current += 1;
     setCopyMessage("");
     dispatch(action);
   }, []);
@@ -56,14 +59,15 @@ export default function Calculator() {
   const copyResult = useCallback(async () => {
     const current = stateRef.current;
     if (current.phase === "error") return;
+    const generation = generationRef.current;
     const { message } = await copyText(displayText(current));
-    setCopyMessage(message);
+    if (generation === generationRef.current) setCopyMessage(message);
   }, []);
 
   useEffect(() => {
     /* Converte teclas em ações; Enter sobre um botão focado fica com o próprio botão. */
     function onKeyDown(event) {
-      const isCopy = (event.ctrlKey || event.metaKey) && !event.altKey && (event.key === "c" || event.key === "C");
+      const isCopy = (event.ctrlKey || event.metaKey) && !event.altKey && !event.shiftKey && (event.key === "c" || event.key === "C");
       if (isCopy) {
         if (hasSelection() || stateRef.current.phase === "error") return;
         event.preventDefault();

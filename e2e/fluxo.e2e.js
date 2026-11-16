@@ -66,22 +66,22 @@ test("teclado: Tab com foco visível, conta, Ctrl+C e Esc", async ({ page }) => 
   await page.goto("/");
   await page.addStyleTag({ content: "*, *::before, *::after { transition: none !important; }" });
 
-  await page.keyboard.press("Tab");
-  await expect(page.getByRole("button", { name: "Modo Dark" })).toBeFocused();
-  await page.keyboard.press("Tab");
-  const copiar = page.getByRole("button", { name: "Copiar resultado" });
-  await expect(copiar).toBeFocused();
-  await page.keyboard.press("Tab");
-  const limpar = page.getByRole("button", { name: "AC, limpar tudo" });
-  await expect(limpar).toBeFocused();
-
-  /* Foco visível medido no elemento focado por Tab (sem chamar focus() por script). */
-  const outline = await limpar.evaluate((el) => {
-    const style = getComputedStyle(el);
-    return { style: style.outlineStyle, width: parseFloat(style.outlineWidth) };
-  });
-  expect(outline.style).not.toBe("none");
-  expect(outline.width).toBeGreaterThanOrEqual(2);
+  /* Foco visível medido em cada elemento focado por Tab (sem chamar focus() por script). */
+  const alvos = [
+    page.getByRole("button", { name: "Modo Dark" }),
+    page.getByRole("button", { name: "Copiar resultado" }),
+    page.getByRole("button", { name: "AC, limpar tudo" }),
+  ];
+  for (const alvo of alvos) {
+    await page.keyboard.press("Tab");
+    await expect(alvo).toBeFocused();
+    const outline = await alvo.evaluate((el) => {
+      const style = getComputedStyle(el);
+      return { style: style.outlineStyle, width: parseFloat(style.outlineWidth) };
+    });
+    expect(outline.style).not.toBe("none");
+    expect(outline.width).toBeGreaterThanOrEqual(2);
+  }
 
   /* Tira o foco das teclas: Enter num botão focado é do próprio botão. */
   await page.evaluate(() => document.activeElement.blur());

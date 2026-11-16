@@ -42,7 +42,9 @@ http
       return;
     }
     response.writeHead(200, { "Content-Type": TYPES[path.extname(file)] || "application/octet-stream" });
-    fs.createReadStream(file).pipe(response);
+    fs.createReadStream(file)
+      .on("error", () => response.destroy())
+      .pipe(response);
   })
   .listen(PORT, "127.0.0.1", () => console.log(`build/ em http://127.0.0.1:${PORT}`));
 /* fim de servir-build.js */

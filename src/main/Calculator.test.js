@@ -2,7 +2,7 @@
  * Calculator.test.js · integração da interface com a FSM (clique e teclado físico).
  */
 import React from "react";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor, act } from "@testing-library/react";
 import Calculator from "./Calculator";
 
 
@@ -99,10 +99,35 @@ describe("Copiar resultado", () => {
     const writeText = jest.fn().mockResolvedValue(undefined);
     setClipboard({ writeText });
     const spy = jest.spyOn(window, "getSelection").mockReturnValue({ toString: () => "Calculadora" });
+    try {
+      render(<Calculator />);
+      fireEvent.keyDown(window, { key: "c", ctrlKey: true });
+      expect(writeText).not.toHaveBeenCalled();
+    } finally {
+      spy.mockRestore();
+    }
+  });
+
+  test("Ctrl+Shift+C fica com o navegador", () => {
+    const writeText = jest.fn().mockResolvedValue(undefined);
+    setClipboard({ writeText });
     render(<Calculator />);
-    fireEvent.keyDown(window, { key: "c", ctrlKey: true });
+    fireEvent.keyDown(window, { key: "C", ctrlKey: true, shiftKey: true });
     expect(writeText).not.toHaveBeenCalled();
-    spy.mockRestore();
+  });
+
+  test("cópia que termina depois de uma tecla nova não mostra mensagem velha", async () => {
+    let finish;
+    const writeText = jest.fn(() => new Promise((resolve) => { finish = resolve; }));
+    setClipboard({ writeText });
+    render(<Calculator />);
+    fireEvent.keyDown(window, { key: "4" });
+    fireEvent.click(screen.getByRole("button", { name: "Copiar resultado" }));
+    await waitFor(() => expect(writeText).toHaveBeenCalledWith("4"));
+    fireEvent.keyDown(window, { key: "5" });
+    await act(async () => { finish(); });
+    expect(copyStatus()).toBeEmptyDOMElement();
+    expect(document.querySelector("output")).toHaveTextContent("45");
   });
 
   test("sem Clipboard API, mostra erro claro e a calculadora segue funcionando", async () => {

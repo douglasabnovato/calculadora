@@ -22,7 +22,7 @@ Site publicado: [calculadora-thema.netlify.app](https://calculadora-thema.netlif
 - Ciclos anteriores: `main` protegida ([#28](https://github.com/douglasabnovato/calculadora/pull/28)); teclas `%` e `±` e CI na `developer` ([#24](https://github.com/douglasabnovato/calculadora/pull/24)); fonte sem bloquear a pintura ([#14](https://github.com/douglasabnovato/calculadora/pull/14)).
 
 **O que queremos fazer**
-- [#34](https://github.com/douglasabnovato/calculadora/issues/34) Mesclar o ciclo de 16/11/2026 na `main` (responsável).
+- [#34](https://github.com/douglasabnovato/calculadora/issues/34) Mesclar o ciclo de 16/11/2026 na `main` (responsável). As issues #20 e #21, resolvidas neste ciclo, fecham depois desse merge.
 - [#18](https://github.com/douglasabnovato/calculadora/issues/18) Publicar na Netlify só depois do CI da `main` (responsável; passo a passo em `docs/DEPLOY.md`).
 - [#30](https://github.com/douglasabnovato/calculadora/issues/30) Exigir o check `e2e` no ruleset da `main` (responsável).
 - [#31](https://github.com/douglasabnovato/calculadora/issues/31) Ligar os alertas do Dependabot (responsável).
@@ -92,7 +92,11 @@ Desenvolvimento de uma calculadora web responsiva com forte foco em experiência
 - [x] Proteger a `main` (ruleset `principal-protegida`, 10/11/2026)
 - [ ] Publicar só depois do CI da `main` ([#18](https://github.com/douglasabnovato/calculadora/issues/18), responsável)
 - [ ] Exigir o `e2e` na `main` ([#30](https://github.com/douglasabnovato/calculadora/issues/30), responsável)
+- [ ] Ligar os alertas do Dependabot ([#31](https://github.com/douglasabnovato/calculadora/issues/31), responsável)
+- [ ] Mesclar o ciclo de 16/11 na `main` ([#34](https://github.com/douglasabnovato/calculadora/issues/34), responsável); #20 e #21 fecham depois desse merge
 - [ ] Histórico das contas ([#19](https://github.com/douglasabnovato/calculadora/issues/19))
+- [ ] Colar um número no visor ([#32](https://github.com/douglasabnovato/calculadora/issues/32))
+- [ ] Conferir com um leitor de tela real ([#33](https://github.com/douglasabnovato/calculadora/issues/33))
 - [ ] Trocar o Create React App pelo Vite ([#22](https://github.com/douglasabnovato/calculadora/issues/22))
 - [ ] "O que aprendi" e futuro do projeto ([#23](https://github.com/douglasabnovato/calculadora/issues/23), responsável)
 
@@ -101,7 +105,7 @@ Desenvolvimento de uma calculadora web responsiva com forte foco em experiência
 ```bash
 npm install
 npm start                       # http://localhost:3000
-npm test -- --watchAll=false    # 49 testes (Jest)
+npm test -- --watchAll=false    # 51 testes (Jest)
 npm run build                   # pasta build/ (site estático)
 npx playwright install chromium # uma vez
 npm run test:e2e                # 5 testes no navegador, com axe (usa a pasta build/)
@@ -147,7 +151,7 @@ Jest e React Testing Library, em 16/11/2026 (`CI=true npm test -- --watchAll=fal
 
 ```text
 Test Suites: 4 passed, 4 total
-Tests:       49 passed, 49 total
+Tests:       51 passed, 51 total
 ```
 
 Playwright 1.65 no Chromium, em 16/11/2026 (`npm run build && npm run test:e2e`):
