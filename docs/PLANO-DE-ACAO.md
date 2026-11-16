@@ -85,3 +85,76 @@
 4. README e `DEPLOY.md` com a Netlify; sai o `render.yaml`.
 
 **Vira issue.** #18 e #23 (responsável); #19, #20, #21 e #22 (agente).
+
+## Ciclo de 16/11/2026
+
+> Branch `feature/2026-11-16` → `developer/sprint-2026-11-12` (o PR #29 para a `main` segue aberto) → `main`. Nível: Estudo (N1), 10 critérios aplicáveis (5 e 7 não se aplicam).
+
+### Produto
+
+**Problema e público.** Quem estuda React, e quem avalia o autor, vê uma calculadora acessível, sem `eval`, com a regra numa máquina de estados testável.
+
+**Hipótese e meta.** Acreditamos que uma pessoa, sem instrução, faz uma conta com dois operadores e copia o resultado, só com o mouse ou só com o teclado. Saberemos quando o teste de ponta a ponta no navegador (Playwright) fizer esse percurso no CI, nos dois temas, com o axe sem violações.
+
+**Revisão contra a régua (16/11/2026).** O `MVP.md` dizia 9 de 10. Pela régua de `padroes.md`, só 6 tinham a evidência pedida:
+- 2: a hipótese não tinha meta nem "saberemos quando".
+- 3: não havia teste no navegador (Playwright) no CI; havia só Jest com jsdom.
+- 8: a evidência era um Lighthouse manual de 02/11; não havia axe nem teste de teclado no CI.
+- 9: `npm audit --omit=dev` apontava 43 alertas (1 crítico), todos do `react-scripts`, que estava em `dependencies`. O risco não estava decidido.
+- 10: já tinha a evidência pedida e seguia como "Parcial". O ruleset `principal-protegida` exige PR e o check `raiz` verde.
+
+**O que a pesquisa trouxe.**
+
+| Ideia | O que levamos para o projeto | Fonte |
+|---|---|---|
+| Teste de acessibilidade com `@axe-core/playwright` | O axe roda dentro do teste de ponta a ponta, na página montada, em cada tema e no estado de erro. O guia avisa que o axe acha só parte dos problemas; por isso o teste também percorre a tela por teclado | [Playwright: Accessibility testing](https://playwright.dev/docs/accessibility-testing) |
+| `navigator.clipboard.writeText` só existe em contexto seguro (HTTPS ou localhost) e pode ser negado | A cópia nunca lança erro: sem a API ou com a permissão negada, a tela mostra uma mensagem clara | [MDN: Clipboard.writeText](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard/writeText) |
+| Mensagem de status sem mover o foco (WCAG 4.1.3) | "Resultado copiado" sai numa região `role="status"`, e o foco fica onde estava | [W3C: Understanding Status Messages](https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html) |
+| Build hook da Netlify e builds parados | Com os builds automáticos parados, o CI chama o build hook só depois de passar na `main`. Fica pronto no workflow; ligar é do responsável (#18) | [Netlify: Build hooks](https://docs.netlify.com/build/configure-builds/build-hooks/), [Netlify: Stop or activate builds](https://docs.netlify.com/build/configure-builds/stop-or-activate-builds/) |
+| `npm audit --omit=dev` mede só o que vai para produção | Ferramenta de build fica em `devDependencies`; o que vai para o navegador é `react`, `react-dom` e `web-vitals` | [npm: npm audit](https://docs.npmjs.com/cli/v11/commands/npm-audit/) |
+
+**Backlog priorizado (impacto × esforço).**
+
+| Prioridade | Item | Impacto | Esforço | Destino |
+|---|---|---|---|---|
+| 1 | `react-scripts` em `devDependencies`; `npm audit --omit=dev` limpo | Alto | Baixo | Este ciclo |
+| 2 | `MVP.md` honesto: hipótese com meta, tabela com evidência da régua | Alto | Baixo | Este ciclo |
+| 3 | Teste Playwright do fluxo principal com axe (claro, escuro e erro) e teclado; job `e2e` no CI | Alto | Médio | Este ciclo (fecha #21) |
+| 4 | Copiar o resultado, com erro claro sem a Clipboard API | Médio | Baixo | Este ciclo (fecha #20) |
+| 5 | `netlify.toml`, passo do build hook no CI e `DEPLOY.md` | Médio | Baixo | Este ciclo; ligar é do responsável (#18) |
+| 6 | Exigir o check `e2e` no ruleset da `main` | Médio | Baixo | Responsável (issue nova) |
+| 7 | Ligar os alertas do Dependabot | Médio | Baixo | Responsável (issue nova) |
+| 8 | Histórico das contas | Médio | Médio | Issue (#19) |
+| 9 | Vite no lugar do CRA | Médio | Médio | Issue (#22) |
+| 10 | Colar um número no visor; teste com leitor de tela real | Baixo | Baixo | Issues novas |
+
+**Fora do escopo.** Memória (M+, MR), modo científico, medição de uso, migrar para o Vite neste ciclo.
+
+### Engenharia
+
+**Arquitetura.** Sem mudança na FSM. A cópia fica num módulo novo, `src/core/clipboard.js`, que devolve `{ ok, message }` e nunca lança erro. O `Calculator` guarda a mensagem e a apaga a cada ação nova. O teste de ponta a ponta serve a pasta `build/` com um servidor estático de Node, sem dependência nova, numa porta própria.
+
+**Riscos.**
+- `react-scripts` em `devDependencies`: a Netlify instala as dependências de desenvolvimento por padrão. Se alguém definir `NODE_ENV=production` no painel, o build quebra. O `netlify.toml` fixa o comando e a pasta.
+- Os 43 alertas seguem no `npm audit` completo, nas ferramentas de build. Não vão para o navegador. A saída é o Vite (#22).
+- O job `e2e` instala o Chromium no CI e deixa o PR mais lento.
+- O check `e2e` só bloqueia o merge na `main` quando o responsável o puser no ruleset.
+
+**Qualidade.**
+- Testes: unitários e de interface no Jest, mais o teste de ponta a ponta no Chromium.
+- Acessibilidade: axe nos dois temas e no erro, em largura de desktop; Tab, foco visível e Esc no teste.
+- Desempenho: não se aplica (N1).
+- Segurança: `npm audit --omit=dev` sem alertas; sem dados, sem `eval`, sem segredo.
+
+**Definição de pronto.** `npm ci`, `npm test`, `npm run build` e `npm run test:e2e` passam; CI verde nos jobs `raiz` e `e2e`; `docs/MVP.md`, README e `DEPLOY.md` atualizados; revisão independente feita.
+
+### Plano de ação
+
+**Este ciclo executa.**
+1. `react-scripts` em `devDependencies` e auditoria de produção.
+2. Teste Playwright com axe e teclado, e job `e2e` no CI.
+3. Botão e atalho para copiar o resultado (#20).
+4. `netlify.toml`, build hook opcional no CI e `DEPLOY.md`.
+5. `MVP.md` e README com a evidência da régua.
+
+**Vira issue.** Exigir o check `e2e` na `main` e ligar o Dependabot (responsável); colar um número no visor; teste com leitor de tela real; mesclar o ciclo na `main` (responsável).
