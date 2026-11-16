@@ -1,69 +1,69 @@
 # Deploy · Calculadora (calcAPP)
 
-Plano de ação para publicar a calculadora em hospedagem gratuita.
+Atualizado em 16/11/2026.
 
-> **Atualização de 03/11/2026:** o site está na Netlify: https://calculadora-thema.netlify.app/. O endereço do Render dava 404 e o `render.yaml` saiu do repositório. A Netlify publica a cada push na `main` sem esperar o CI; ligar a publicação ao CI é do responsável (#18). O plano abaixo fica como histórico.
+## Estado
 
-## 1. Desafio
+- Site: https://calculadora-thema.netlify.app/ (HTTP 200 em 16/11/2026, `<title>Calculadora · calcAPP</title>`).
+- Hospedagem: Netlify, plano gratuito, site estático. Sem backend, sem banco, sem segredo no código.
+- A Netlify publica a cada push na `main`. A `main` só recebe mudança por PR, com o check `raiz` verde (ruleset `principal-protegida`).
+- O que falta (responsável, #18): a Netlify publicar só depois de o CI passar **na própria `main`**. Hoje ela não espera o run da `main`.
 
-Publicar uma SPA em Create React App, sem backend e sem segredos, com deploy automático a cada push e sem custo.
+## Configuração versionada
 
-## 2. Conteúdo
-
-### Decisão de hospedagem
-
-| Opção | Resultado |
+| Arquivo | O que faz |
 |---|---|
-| **Render Static Site (escolhida)** | Gratuito, CDN, não hiberna, build a cada push, configuração versionada em `render.yaml` |
-| GitHub Pages | Exigiria um workflow em `.github/` ou o pacote `gh-pages` com deploy manual |
+| `netlify.toml` | Comando `npm run build`, pasta `build` e Node 22, iguais aos do CI |
+| `.github/workflows/ci.yml` | Jobs `raiz` (auditoria, testes, build) e `e2e` (Playwright com axe). O job `publicar` chama o build hook da Netlify só na `main`, depois dos dois, e só se o segredo `NETLIFY_BUILD_HOOK` existir |
+| `package.json` | `"homepage": "."`: caminhos relativos no build |
 
-### O que foi ajustado para o deploy
+O `react-scripts` está em `devDependencies`. A Netlify instala as dependências de desenvolvimento por padrão. Não defina `NODE_ENV=production` nas variáveis do site: o build quebraria.
 
-| Mudança | Arquivo | Por quê |
-|---|---|---|
-| Blueprint do site estático | `render.yaml` | Infraestrutura como código |
-| `package-lock.json` regenerado | `package-lock.json` | O lock anterior estava fora de sincronia (`typescript@7` no lock contra `4.9.5` exigido) e o `npm ci` do deploy falhava |
-| Seção "Em produção" | `README.md` | Link da demonstração e forma de publicar |
+## Rodar e conferir localmente
 
-Já estava pronto do ciclo anterior: `"homepage": "."` no `package.json` (caminhos relativos no build).
+```bash
+npm ci
+npm audit --omit=dev          # 0 vulnerabilidades
+npm test -- --watchAll=false  # Jest: regras, tela e teclado
+npm run build                 # pasta build/
+npx playwright install chromium
+npm run test:e2e              # Playwright + axe sobre o build, porta 4317
+```
 
-### Verificação feita antes da entrega
+## Passo a passo do responsável: publicar só depois do CI (#18)
 
-- `npm ci` limpo, 28 testes passando (3 suítes), `npm run build` com `CI=true` sem avisos.
-- `npm audit --omit=dev` aponta falhas apenas em ferramentas de build do `react-scripts` (não vão para o navegador). A saída definitiva é migrar CRA → Vite, já registrada como dívida técnica.
+Nada aqui exige plano pago. Não cole o endereço do build hook em issue, PR ou chat: ele funciona como senha.
 
-## 3. Solução (passo a passo)
+1. **Criar o build hook na Netlify.**
+   1. Entre em app.netlify.com e abra o site `calculadora-thema`.
+   2. **Site configuration → Build & deploy → Continuous deployment → Build hooks → Add build hook**.
+   3. Nome: `ci-main`. Branch to build: `main`. Clique em **Save**.
+   4. Copie o endereço gerado (começa com `https://api.netlify.com/build_hooks/`).
+2. **Guardar o endereço como segredo no GitHub.**
+   1. No repositório `calculadora`: **Settings → Secrets and variables → Actions → New repository secret**.
+   2. Name: `NETLIFY_BUILD_HOOK`. Secret: o endereço do passo 1.4. Clique em **Add secret**.
+3. **Ignorar os builds que não vêm do build hook.**
+   1. Na Netlify: **Site configuration → Build & deploy → Continuous deployment → Build settings → Configure**.
+   2. Deixe **Build status** em **Active**. Não use **Stopped builds**: com os builds parados, a Netlify também ignora o build hook.
+   3. No campo **Ignore builds**, cole `[ -z "$INCOMING_HOOK_URL" ]` e clique em **Save**. A Netlify só define `INCOMING_HOOK_URL` quando o build vem de um build hook. Num push, o comando sai com 0 e o build é cancelado; pelo hook, sai com 1 e o build segue.
+   4. Faça este passo só depois do passo 2. Sem o segredo, nenhum build seria disparado.
+4. **Conferir.**
+   1. Depois do próximo merge na `main`, abra **Actions → CI** e veja o job `publicar` com a linha "Build hook chamado.".
+   2. Na Netlify, **Deploys** mostra um deploy com a origem "build hook".
+   3. Um commit com teste quebrado numa branch de teste deixa o job `publicar` sem rodar (ele depende de `raiz` e `e2e`).
+5. **Exigir o teste no navegador antes do merge** (issue própria): em **Settings → Rules → Rulesets → principal-protegida → Require status checks to pass**, adicione o check `e2e` ao lado do `raiz` e salve.
 
-### Etapa 1 · Validar localmente (Git Bash)
+Fontes: [Netlify, Build hooks](https://docs.netlify.com/build/configure-builds/build-hooks/); [Netlify, Ignore builds](https://docs.netlify.com/build/configure-builds/ignore-builds/); [Netlify, variáveis do build (`INCOMING_HOOK_URL`)](https://docs.netlify.com/build/configure-builds/environment-variables/); [Netlify, Stop or activate builds](https://docs.netlify.com/build/configure-builds/stop-or-activate-builds/) (com builds parados, o hook não publica); [Netlify, File-based configuration](https://docs.netlify.com/build/configure-builds/file-based-configuration/).
 
-1. `cd /c/ambiente-projeto/ser-mvp/calculadora`
-2. `npm ci`
-3. `npm test -- --watchAll=false` (28 testes)
-4. `npm run build`
+## Conferir o site no ar
 
-### Etapa 2 · Subir para o GitHub
+1. `curl -s -o /dev/null -w "%{http_code}" https://calculadora-thema.netlify.app/` devolve `200`.
+2. A página tem `<title>Calculadora · calcAPP</title>`.
+3. `12 × 3 + 4 =` mostra `40`; "Copiar resultado" mostra "Resultado copiado".
+4. `8 ÷ 0 =` mostra "Não é possível dividir por zero".
 
-1. `git rm test-results.log` (log antigo que contradiz o README)
-2. `git status` (não podem aparecer `node_modules/`, `build/` nem `.env`)
-3. `git add -A`
-4. `git commit -m "refactor: MVP — FSM pura, teclado, vírgula pt-BR, React 18, testes, docs e deploy no Render"`
-5. `git push`
+## Histórico
 
-### Etapa 3 · Criar o site no Render
-
-1. Entrar em **render.com** com o GitHub e autorizar o repositório `calculadora`.
-2. **New → Blueprint** e escolher `douglasabnovato/calculadora`.
-3. Conferir o serviço `calculadora` (Static Site) e clicar em **Apply**.
-4. Esperar o build (2 a 4 min) e abrir a URL gerada.
-
-### Etapa 4 · Conferir no ar
-
-1. A calculadora abre com o tema do sistema e o favicon.
-2. `12 + 3 =` mostra `15`; `1 ÷ 0` mostra a mensagem de erro.
-3. O teclado físico funciona (números, `Enter`, `Backspace`, `Esc`).
-4. A troca de tema continua salva ao recarregar.
-
-### Etapa 5 · Fechar
-
-1. Se a URL real for diferente de `https://calculadora.onrender.com`, corrigir no `README.md`, commit e push.
-2. No GitHub, **About → Website**: colar a URL.
+- 03/11/2026: o endereço do Render dava 404; o site passou para a Netlify e o `render.yaml` saiu do repositório.
+- 10/11/2026: ruleset `principal-protegida` na `main` (PR obrigatório e check `raiz`).
+- 16/11/2026: `netlify.toml`, job `e2e` e job `publicar` (build hook opcional) no CI.

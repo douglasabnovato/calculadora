@@ -96,12 +96,12 @@
 
 **Hipótese e meta.** Acreditamos que uma pessoa, sem instrução, faz uma conta com dois operadores e copia o resultado, só com o mouse ou só com o teclado. Saberemos quando o teste de ponta a ponta no navegador (Playwright) fizer esse percurso no CI, nos dois temas, com o axe sem violações.
 
-**Revisão contra a régua (16/11/2026).** O `MVP.md` dizia 9 de 10. Pela régua de `padroes.md`, só 6 tinham a evidência pedida:
+**Revisão contra a régua (16/11/2026).** O `MVP.md` dizia 9 de 10. Pela régua de `padroes.md`, 6 tinham a evidência pedida (1, 4, 6, 10, 11 e 12). Quatro "Atende" não tinham, e o 10 estava abaixo do que a evidência já mostrava:
 - 2: a hipótese não tinha meta nem "saberemos quando".
 - 3: não havia teste no navegador (Playwright) no CI; havia só Jest com jsdom.
 - 8: a evidência era um Lighthouse manual de 02/11; não havia axe nem teste de teclado no CI.
 - 9: `npm audit --omit=dev` apontava 43 alertas (1 crítico), todos do `react-scripts`, que estava em `dependencies`. O risco não estava decidido.
-- 10: já tinha a evidência pedida e seguia como "Parcial". O ruleset `principal-protegida` exige PR e o check `raiz` verde.
+- 10: estava "Parcial", mas já tinha a evidência que a régua pede: CI nos PRs e o ruleset `principal-protegida`, que exige PR e o check `raiz` verde.
 
 **O que a pesquisa trouxe.**
 
@@ -110,8 +110,8 @@
 | Teste de acessibilidade com `@axe-core/playwright` | O axe roda dentro do teste de ponta a ponta, na página montada, em cada tema e no estado de erro. O guia avisa que o axe acha só parte dos problemas; por isso o teste também percorre a tela por teclado | [Playwright: Accessibility testing](https://playwright.dev/docs/accessibility-testing) |
 | `navigator.clipboard.writeText` só existe em contexto seguro (HTTPS ou localhost) e pode ser negado | A cópia nunca lança erro: sem a API ou com a permissão negada, a tela mostra uma mensagem clara | [MDN: Clipboard.writeText](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard/writeText) |
 | Mensagem de status sem mover o foco (WCAG 4.1.3) | "Resultado copiado" sai numa região `role="status"`, e o foco fica onde estava | [W3C: Understanding Status Messages](https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html) |
-| Build hook da Netlify e builds parados | Com os builds automáticos parados, o CI chama o build hook só depois de passar na `main`. Fica pronto no workflow; ligar é do responsável (#18) | [Netlify: Build hooks](https://docs.netlify.com/build/configure-builds/build-hooks/), [Netlify: Stop or activate builds](https://docs.netlify.com/build/configure-builds/stop-or-activate-builds/) |
-| `npm audit --omit=dev` mede só o que vai para produção | Ferramenta de build fica em `devDependencies`; o que vai para o navegador é `react`, `react-dom` e `web-vitals` | [npm: npm audit](https://docs.npmjs.com/cli/v11/commands/npm-audit/) |
+| Build hook da Netlify e "Ignore builds" | O CI chama o build hook só depois de passar na `main`; na Netlify, o comando de ignorar cancela o build que não vem do hook (`INCOMING_HOOK_URL` vazio). "Stopped builds" não serve: com ele, o hook também não publica. Fica pronto no workflow; ligar é do responsável (#18) | [Netlify: Build hooks](https://docs.netlify.com/build/configure-builds/build-hooks/), [Netlify: Ignore builds](https://docs.netlify.com/build/configure-builds/ignore-builds/), [Netlify: Stop or activate builds](https://docs.netlify.com/build/configure-builds/stop-or-activate-builds/) |
+| `npm audit --omit=dev` mede só o que vai para produção | Ferramenta de build fica em `devDependencies`; em `dependencies` ficam só `react`, `react-dom` e `web-vitals` | [npm: npm audit](https://docs.npmjs.com/cli/v11/commands/npm-audit/) |
 
 **Backlog priorizado (impacto × esforço).**
 
