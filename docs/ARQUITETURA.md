@@ -68,6 +68,9 @@ Regras numéricas:
 | `Enter` ou `=` | Igual |
 | `Backspace` | Apagar último dígito |
 | `Esc` ou `Delete` | Limpar tudo (AC) |
+| `%` | Percentual |
+| `F9` | Trocar sinal |
+| `Ctrl+C` (ou `Cmd+C`) sem texto selecionado | Copiar o resultado; com texto selecionado, a cópia é do navegador |
 
 ## 5. Decisões de arquitetura (ADR)
 

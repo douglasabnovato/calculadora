@@ -28,7 +28,7 @@ describe("App", () => {
     const { container } = render(<App />);
     fireEvent.click(screen.getByRole("button", { name: "9" }));
     expect(container.querySelector("output")).toHaveTextContent("9");
-    fireEvent.click(screen.getByRole("button", { name: "Limpar tudo" }));
+    fireEvent.click(screen.getByRole("button", { name: "AC, limpar tudo" }));
     expect(container.querySelector("output")).toHaveTextContent("0");
   });
 
