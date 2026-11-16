@@ -1,4 +1,4 @@
-> **Projeto de estudo (N1).** Estado conferido em 16/11/2026: 10 de 10 critérios aplicáveis atendidos, MVP finalizado. Detalhes em [docs/MVP.md](docs/MVP.md) e plano do ciclo em [docs/PLANO-DE-ACAO.md](docs/PLANO-DE-ACAO.md).
+> **Projeto de estudo (N1).** Estado conferido em 16/11/2026: 9 de 10 critérios aplicáveis atendidos, MVP finalizado (o 9 fica Parcial até o responsável ligar os alertas do Dependabot, #31). Detalhes em [docs/MVP.md](docs/MVP.md) e plano do ciclo em [docs/PLANO-DE-ACAO.md](docs/PLANO-DE-ACAO.md).
 
 <h4 align="center"> 
   Calculadora - React.js
