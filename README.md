@@ -1,4 +1,4 @@
-> **Projeto de estudo (N1).** Estado conferido em 16/11/2026: 9 de 10 critérios aplicáveis atendidos, MVP finalizado (o 9 fica Parcial até o responsável ligar os alertas do Dependabot, #31). Detalhes em [docs/MVP.md](docs/MVP.md) e plano do ciclo em [docs/PLANO-DE-ACAO.md](docs/PLANO-DE-ACAO.md).
+> **Projeto de estudo (N1).** Estado conferido em 16/11/2026: 9 de 10 critérios aplicáveis atendidos, MVP não finalizado: o 9 fica Parcial até os 21 alertas do Dependabot que restam terem correção ou decisão (#38). Detalhes em [docs/MVP.md](docs/MVP.md) e plano do ciclo em [docs/PLANO-DE-ACAO.md](docs/PLANO-DE-ACAO.md).
 
 <h4 align="center"> 
   Calculadora - React.js
@@ -13,6 +13,7 @@
 Site publicado: [calculadora-thema.netlify.app](https://calculadora-thema.netlify.app/) (HTTP 200 em 16/11/2026). O que está na `developer/sprint-2026-11-12` chega ao site quando o responsável mesclar o PR [#29](https://github.com/douglasabnovato/calculadora/pull/29).
 
 **O que foi feito**
+- Alertas do Dependabot ligados pelo responsável em 16/11/2026: 30 dos 51 corrigidos só no `package-lock.json`, sem versão maior ([#39](https://github.com/douglasabnovato/calculadora/pull/39)); os 21 que restam dependem de sair do Create React App ou de decisão do responsável ([#38](https://github.com/douglasabnovato/calculadora/issues/38)). Critério 9 em "Parcial" e Finalizado "não" até lá.
 - Teste no navegador (Playwright) do fluxo principal, com axe nos temas Vivo e Dark e no erro, Tab, foco visível e Esc; job `e2e` no CI ([#35](https://github.com/douglasabnovato/calculadora/pull/35)).
 - O axe achou um nome falado errado na tecla AC (WCAG 2.5.3); agora é "AC, limpar tudo" ([#35](https://github.com/douglasabnovato/calculadora/pull/35)).
 - Botão "Copiar resultado" e Ctrl+C, com erro claro sem a Clipboard API ([#35](https://github.com/douglasabnovato/calculadora/pull/35)).
@@ -25,7 +26,8 @@ Site publicado: [calculadora-thema.netlify.app](https://calculadora-thema.netlif
 - [#34](https://github.com/douglasabnovato/calculadora/issues/34) Mesclar o ciclo de 16/11/2026 na `main` (responsável). As issues #20 e #21, resolvidas neste ciclo, fecham depois desse merge.
 - [#18](https://github.com/douglasabnovato/calculadora/issues/18) Publicar na Netlify só depois do CI da `main` (responsável; passo a passo em `docs/DEPLOY.md`).
 - [#30](https://github.com/douglasabnovato/calculadora/issues/30) Exigir o check `e2e` no ruleset da `main` (responsável).
-- [#31](https://github.com/douglasabnovato/calculadora/issues/31) Ligar os alertas do Dependabot (responsável).
+- [#38](https://github.com/douglasabnovato/calculadora/issues/38) Resolver os 21 alertas do Dependabot que restam (Vite na #22, ou risco aceito em ADR pelo responsável).
+- [#31](https://github.com/douglasabnovato/calculadora/issues/31) Ligar os alertas do Dependabot (feito pelo responsável em 16/11/2026; evidência comentada na issue).
 - [#23](https://github.com/douglasabnovato/calculadora/issues/23) Registrar o que o projeto ensinou e decidir o futuro dele (responsável).
 - [#19](https://github.com/douglasabnovato/calculadora/issues/19) Histórico das últimas contas da sessão.
 - [#22](https://github.com/douglasabnovato/calculadora/issues/22) Trocar o Create React App pelo Vite.
