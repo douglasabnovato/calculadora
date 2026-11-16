@@ -11,7 +11,7 @@ import { reducer, initialState, displayText, expressionText, keyToAction } from 
 import { copyText } from "../core/clipboard";
 
 const KEYS = [
-  { label: "AC", aria: "Limpar tudo", action: { type: "CLEAR" } },
+  { label: "AC", aria: "AC, limpar tudo", action: { type: "CLEAR" } },
   { label: "±", aria: "Trocar sinal", action: { type: "NEGATE" } },
   { label: "%", aria: "Percentual", action: { type: "PERCENT" } },
   { label: "÷", aria: "Dividir", action: { type: "OPERATOR", operator: "/" }, operation: true },
