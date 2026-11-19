@@ -10,7 +10,7 @@
 
 ## Estado e próximos passos (ciclo de 16/11/2026)
 
-Site publicado: [calculadora-thema.netlify.app](https://calculadora-thema.netlify.app/) (HTTP 200 em 16/11/2026). O que está na `developer/sprint-2026-11-12` chega ao site quando o responsável mesclar o PR [#29](https://github.com/douglasabnovato/calculadora/pull/29).
+Site publicado: [calculadora-thema.netlify.app](https://calculadora-thema.netlify.app/) (HTTP 200 em 18/11/2026). O ciclo de 16/11/2026 já está na `main` e no site (PRs [#29](https://github.com/douglasabnovato/calculadora/pull/29), [#37](https://github.com/douglasabnovato/calculadora/pull/37) e [#40](https://github.com/douglasabnovato/calculadora/pull/40)): o pacote publicado tem o botão "Copiar resultado" (18/11/2026).
 
 **O que foi feito**
 - Alertas do Dependabot ligados pelo responsável em 16/11/2026: 30 dos 51 corrigidos só no `package-lock.json`, sem versão maior ([#39](https://github.com/douglasabnovato/calculadora/pull/39)); os 21 que restam são só de desenvolvimento (nada vai para o site) e ficam aceitos na [ADR-004](docs/adr/ADR-004-alertas-de-desenvolvimento-aceitos.md), pela regra geral do responsável, até a troca pelo Vite ([#22](https://github.com/douglasabnovato/calculadora/issues/22)). Critério 9 em "Atende": 10 de 10 critérios e Finalizado "sim".
@@ -23,16 +23,20 @@ Site publicado: [calculadora-thema.netlify.app](https://calculadora-thema.netlif
 - Ciclos anteriores: `main` protegida ([#28](https://github.com/douglasabnovato/calculadora/pull/28)); teclas `%` e `±` e CI na `developer` ([#24](https://github.com/douglasabnovato/calculadora/pull/24)); fonte sem bloquear a pintura ([#14](https://github.com/douglasabnovato/calculadora/pull/14)).
 
 **O que queremos fazer**
-- [#34](https://github.com/douglasabnovato/calculadora/issues/34) Mesclar o ciclo de 16/11/2026 na `main` (responsável). As issues #20 e #21, resolvidas neste ciclo, fecham depois desse merge.
-- [#18](https://github.com/douglasabnovato/calculadora/issues/18) Publicar na Netlify só depois do CI da `main` (responsável; passo a passo em `docs/DEPLOY.md`).
-- [#30](https://github.com/douglasabnovato/calculadora/issues/30) Exigir o check `e2e` no ruleset da `main` (responsável).
-- [#38](https://github.com/douglasabnovato/calculadora/issues/38) Os 21 alertas do Dependabot que restam: decididos na ADR-004 (16/11/2026); somem de vez com o Vite (#22).
-- [#31](https://github.com/douglasabnovato/calculadora/issues/31) Ligar os alertas do Dependabot (feito pelo responsável em 16/11/2026; evidência comentada na issue).
-- [#23](https://github.com/douglasabnovato/calculadora/issues/23) Registrar o que o projeto ensinou e decidir o futuro dele (responsável).
-- [#19](https://github.com/douglasabnovato/calculadora/issues/19) Histórico das últimas contas da sessão.
-- [#22](https://github.com/douglasabnovato/calculadora/issues/22) Trocar o Create React App pelo Vite.
-- [#32](https://github.com/douglasabnovato/calculadora/issues/32) Colar um número no visor.
+
+Os 3 próximos passos (rótulo `proximo-passo`, regra de 18/11/2026):
+- [#22](https://github.com/douglasabnovato/calculadora/issues/22) Trocar o Create React App pelo Vite. Tira os 21 alertas de desenvolvimento aceitos na ADR-004.
 - [#33](https://github.com/douglasabnovato/calculadora/issues/33) Conferir com um leitor de tela real.
+- [#19](https://github.com/douglasabnovato/calculadora/issues/19) Histórico das últimas contas da sessão.
+
+Com o responsável:
+- [#34](https://github.com/douglasabnovato/calculadora/issues/34) Mesclar o ciclo de 16/11/2026 na `main`: cumprida em 16/11/2026, falta fechar. As #20 e #21 foram fechadas em 18/11/2026.
+- [#31](https://github.com/douglasabnovato/calculadora/issues/31) Alertas do Dependabot: ligados em 16/11/2026; falta ligar as atualizações de segurança.
+- [#18](https://github.com/douglasabnovato/calculadora/issues/18) Publicar na Netlify só depois do CI da `main` (passo a passo em `docs/DEPLOY.md`).
+- [#30](https://github.com/douglasabnovato/calculadora/issues/30) Exigir o check `e2e` no ruleset da `main`.
+- [#23](https://github.com/douglasabnovato/calculadora/issues/23) Registrar o que o projeto ensinou e decidir o futuro dele.
+
+Fora do nível N1: colar um número no visor ([#32](https://github.com/douglasabnovato/calculadora/issues/32), fechada como não planejada em 18/11/2026).
 
 **Onde está a documentação**
 - Estado e critérios: [docs/MVP.md](docs/MVP.md).
@@ -94,10 +98,9 @@ Desenvolvimento de uma calculadora web responsiva com forte foco em experiência
 - [x] Proteger a `main` (ruleset `principal-protegida`, 10/11/2026)
 - [ ] Publicar só depois do CI da `main` ([#18](https://github.com/douglasabnovato/calculadora/issues/18), responsável)
 - [ ] Exigir o `e2e` na `main` ([#30](https://github.com/douglasabnovato/calculadora/issues/30), responsável)
-- [ ] Ligar os alertas do Dependabot ([#31](https://github.com/douglasabnovato/calculadora/issues/31), responsável)
-- [ ] Mesclar o ciclo de 16/11 na `main` ([#34](https://github.com/douglasabnovato/calculadora/issues/34), responsável); #20 e #21 fecham depois desse merge
+- [x] Ligar os alertas do Dependabot ([#31](https://github.com/douglasabnovato/calculadora/issues/31), responsável, 16/11/2026); falta ligar as atualizações de segurança
+- [x] Mesclar o ciclo de 16/11 na `main` ([#34](https://github.com/douglasabnovato/calculadora/issues/34), responsável, 16/11/2026); #20 e #21 fechadas em 18/11/2026
 - [ ] Histórico das contas ([#19](https://github.com/douglasabnovato/calculadora/issues/19))
-- [ ] Colar um número no visor ([#32](https://github.com/douglasabnovato/calculadora/issues/32))
 - [ ] Conferir com um leitor de tela real ([#33](https://github.com/douglasabnovato/calculadora/issues/33))
 - [ ] Trocar o Create React App pelo Vite ([#22](https://github.com/douglasabnovato/calculadora/issues/22))
 - [ ] "O que aprendi" e futuro do projeto ([#23](https://github.com/douglasabnovato/calculadora/issues/23), responsável)
